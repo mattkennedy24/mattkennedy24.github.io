@@ -55,22 +55,25 @@
                 <p>Our work involved evolving the database architecture, implementing GCP cloud functions for table interactions, and establishing a streamlined workflow for audio and spectrogram integration. Regular communication with the client ensured alignment, and we utilized Jira for project management, maintaining velocity and adapting based on sprint insights.
                     I managed feature branches across both the APP and API repositories, deploying to a development site mirroring production for thorough testing before deployment to the production environment.</p>
                 <p>Our application now serves over 50 global partners across 100+ locations, boasting a user base of over 1000 users. With the added capabilities for audio file management and bird identification, we have positioned our client for success in attracting new partners and users from around the world</p>
-                <!-- YouTube Video Embed -->
-                <div>
-                    <button id="playButton">See a demo of the validations page</button>
-                    <div id="videoContainer" style="display: none;">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/EkCIK61cBtM" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div class="pdf-container">
-                        <button id="pdfButton">View my performance review</button>
-                        <div id="pdfContainer">
-                            <iframe src="files/review.pdf" width="100%" height="500px"></iframe>
+                
+                <div id="content-container">
+                    <div>
+                        <!-- YouTube Video Embed -->
+                        <button id="playButton">See a demo of the validations page</button>
+                        <div id="videoContainer" style="display: none;">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/EkCIK61cBtM" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <!-- Performance Review PDF Embed -->
+                        <div class="pdf-container">
+                            <button id="pdfButton">View my performance review</button>
+                            <div id="pdfContainer" style="display: none;">
+                                <iframe src="files/review.pdf" width="100%" height="500px"></iframe>
+                            </div>
                         </div>
                     </div>
-            </div>
+                </div>
         </section>
 
     </div>
