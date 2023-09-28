@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Internship</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css" />
+    </noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Header -->
+    <header id="header">
+        <a href="index.html" class="title">Work Experience</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="generic.html" class="active">Job Summary</a></li>
+                <li><a href="elements.html">Elements</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <section id="main" class="wrapper">
+            <div class="inner">
+                <h1 class="major">My Accomplishments at Pariveda</h1>
+                <span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
+                <p>As a technical consultant, my primary responsibility involved full-stack web development for the Urban Wildlife Information Network (UWIN) research website. To provide context, when we embarked on this project, UWIN had an outdated web app that allowed users to upload and identify animal photos from camera traps. To modernize and enhance the platform, we initiated a series of significant changes. We restructured the database to support audio data alongside images, upgraded the app from Angular v4 to v16, and integrated a state-of-the-art acoustic data processing pipeline.</p>
+                <p>These modifications opened the door for over 1000 global users to upload audio files collected from Audio Recording Units (ARUs). The pipeline efficiently divides 30+ minute recordings into 3-second segments, distinguishing bird songs from urban noise, and employing an advanced ML model to identify the detected species. It provides users with information on the detected bird species, including a percentage of confidence and an audio spectrogram image, all of which is stored in MySQL or Google Cloud Platform (GCP)</p>
+                <p>One of my key contributions was the development of the new recordings validations page from the ground up. This page is where all the output from our pipeline is delivered from the server to the client. Building this page posed a variety of intricate technical challenges. It displays all 3-second clips that received a bird identification from the ML model, and these results are sorted by confidence level. Integrating audio files, spectrograms, recordings, and species data from GCP buckets and MySQL necessitated the development of efficient API calls, Cloud Functions, and data structures for data management. Researchers can now validate detections by listening to these 3-second clips and confirming the presence of specific bird species. The absence of similar services has firmly established our client as a leader in animal identification research.</p>
+                <p>Our work involved evolving the database architecture, implementing GCP cloud functions for table interactions, and establishing a streamlined workflow for audio and spectrogram integration. Regular communication with the client ensured alignment, and we utilized Jira for project management, maintaining velocity and adapting based on sprint insights.
+                    I managed feature branches across both the APP and API repositories, deploying to a development site mirroring production for thorough testing before deployment to the production environment.</p>
+                <p>Our application now serves over 50 global partners across 100+ locations, boasting a user base of over 1000 users. With the added capabilities for audio file management and bird identification, we have positioned our client for success in attracting new partners and users from around the world</p>
+                <!-- YouTube Video Embed -->
+                <div>
+                    <button id="playButton">See a demo of the validations page</button>
+                    <div id="videoContainer" style="display: none;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/EkCIK61cBtM" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="wrapper alt">
+        <div class="inner">
+            <ul class="menu">
+                <li>&copy; Untitled. All rights reserved.</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        // JavaScript to show/hide the video
+        const playButton = document.getElementById("playButton");
+        const videoContainer = document.getElementById("videoContainer");
+    
+        playButton.addEventListener("click", function () {
+            playButton.style.display = "none";
+            videoContainer.style.display = "block";
+        });
+    </script>
+</body>
+
+</html>
