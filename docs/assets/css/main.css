@@ -5,34 +5,6 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
-/* Style for the navigation buttons */
-#page-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-#previous, #next {
-    background-color: #670af3; /* Button color */
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-/* Positioning the buttons */
-#previous {
-    order: 1; /* Sets the button to the left */
-}
-
-#next {
-    order: 2; /* Sets the button to the right */
-}
 
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
