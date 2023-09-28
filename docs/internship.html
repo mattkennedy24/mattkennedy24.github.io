@@ -65,13 +65,17 @@
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen></iframe>
                         </div>
-                        <!-- Performance Review PDF Embed -->
                         <div class="pdf-container">
                             <button id="pdfButton">View my performance review</button>
-                            <div id="pdfContainer" style="display: none;">
-                                <iframe src="files/review.pdf" width="100%" height="500px"></iframe>
-                            </div>
                         </div>
+                        <!-- Performance Review PDF Embed -->
+                        <!-- <div class="pdf-container">         -->
+                            <!-- <button id="pdfButton">View my performance review</button> -->
+                            
+                            <!-- <div id="pdfContainer" style="display: none;">
+                                <iframe src="files/review.pdf" width="100%" height="500px"></iframe>
+                            </div> -->
+                        <!-- </div> -->
                     </div>
                 </div>
         </section>
@@ -107,15 +111,24 @@
         });
 
         // JavaScript to show/hide the PDF of my performance review
+        // const pdfButton = document.getElementById("pdfButton");
+        // const pdfContainer = document.getElementById("pdfContainer");
+
+        // pdfButton.addEventListener("click", function () {
+        //     pdfButton.style.display = "none";
+        //     pdfContainer.style.display = "block";
+        // });
         const pdfButton = document.getElementById("pdfButton");
-        const pdfContainer = document.getElementById("pdfContainer");
 
         pdfButton.addEventListener("click", function () {
-            pdfButton.style.display = "none";
-            pdfContainer.style.display = "block";
+            // Specify the path to the PDF file
+            const pdfPath = "files/review.pdf";
+
+            // Open the PDF in a new tab or window
+            window.open(pdfPath, "_blank");
         });
 
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>
