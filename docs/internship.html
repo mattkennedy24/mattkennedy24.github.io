@@ -64,9 +64,12 @@
                             allowfullscreen></iframe>
                     </div>
                 </div>
-                <div id="pdfContainer" style="display: none;">
-                    <iframe src="../files/review.pdf" width="100%" height="500px"></iframe>
-                </div>
+                <div class="pdf-container">
+                        <button id="pdfButton">View my performance review</button>
+                        <div id="pdfContainer">
+                            <iframe src="../files/review.pdf" width="100%" height="500px"></iframe>
+                        </div>
+                    </div>
             </div>
         </section>
 
@@ -99,6 +102,16 @@
             playButton.style.display = "none";
             videoContainer.style.display = "block";
         });
+
+        // JavaScript to show/hide the PDF of my performance review
+        const pdfButton = document.getElementById("pdfButton");
+        const pdfContainer = document.getElementById("pdfContainer");
+
+        pdfButton.addEventListener("click", function () {
+            pdfButton.style.display = "none";
+            pdfContainer.style.display = "block";
+        });
+
     </script>
 </body>
 
