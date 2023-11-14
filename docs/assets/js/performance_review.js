@@ -3,7 +3,7 @@ const previousButton = document.getElementById("previousButton");
 const nextButton = document.getElementById("nextButton");
 
 // Array of image file names
-const images = ["0001.jpg", "0002.jpg", "0003.jpg", "0004.jpg"];
+const images = ["../../images/0001.jpg", "../../images/0002.jpg", "../../images/0003.jpg", "../../images/0004.jpg"];
 let currentPage = 0;
 
 function showImage(page) {
