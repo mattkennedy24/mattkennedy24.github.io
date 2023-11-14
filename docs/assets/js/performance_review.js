@@ -1,7 +1,6 @@
-const imageContainer = document.getElementById("image-container");
 const image = document.getElementById("image");
-const previousButton = document.getElementById("previous");
-const nextButton = document.getElementById("next");
+const previousButton = document.getElementById("previousButton");
+const nextButton = document.getElementById("nextButton");
 
 // Array of image file names
 const images = ["0001.jpg", "0002.jpg", "0003.jpg", "0004.jpg"];

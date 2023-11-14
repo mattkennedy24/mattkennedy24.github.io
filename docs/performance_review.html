@@ -15,14 +15,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 10px;
+            margin-bottom: 20px;
         }
 
         #previous,
         #next {
-            background-color: #670af3;
-            /* Button color */
-            color: #fff;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -68,27 +66,17 @@
                 <p>Below is a copy of my performance review which includes feedback from my co-interns, developer lead,
                     manager, and summarized by my mentor.</p>
                 <div id="image-container">
-                    <span class="image fit"><img id="image" src="images/0001.jpg" alt="" /></span>
+                    <span class="image fit"><img id="image" src="images/0001.jpg"/></span>
                 </div>
 
             </div>
             <div id="page-navigation">
-                <button id="previous">Previous Page</button>
-                <button id="next">Next Page</button>
+                <button id="previousButton">Previous Page</button>
+                <button id="nextButton">Next Page</button>
             </div>
         </section>
 
     </div>
-
-    <!-- Footer -->
-    <footer id="footer" class="wrapper alt">
-        <div class="inner">
-            <ul class="menu">
-                <li>&copy; Untitled. All rights reserved.</li>
-                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-            </ul>
-        </div>
-    </footer>
 
     <!-- Scripts -->
     <script src="assets/js/jquery.min.js"></script>
@@ -98,7 +86,7 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="performance_review.js"></script>
+    <script src="assets/js/performance_review.js"></script>
 
 </body>
 
