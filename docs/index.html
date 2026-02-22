@@ -15,6 +15,7 @@
 					<nav>
 						<ul>
 							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#skills">Skills</a></li>
 							<li><a href="#one">Work Experience</a></li>
 							<li><a href="#two">Projects and Hobbies</a></li>
 							<li><a href="#three">Get in Touch</a></li>
@@ -29,22 +30,63 @@
 				<!-- Intro -->
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
-							<h1>Hello</h1>
-							<p>I am Matt Kennedy, and this is my personal webpage. I took up this project because a personal webpage is the perfect medium to showcase my creativity and technical skills, while also giving me the opportunity to tell you a little bit about myself.</p>
+							<h1>Matt Kennedy</h1>
+							<p>Software Engineer based in St. Louis, MO. Notre Dame CS grad building enterprise software at Benefit Finance Partners — from Blazor client portals serving $1B+ in AUM to AI tooling that keeps teams ahead of the curve. I love shipping things that matter.</p>
 							<ul class="actions">
-								<li><a href="#one" class="button scrolly">Learn more</a></li>
+								<li><a href="#one" class="button scrolly">See my work</a></li>
+								<li><a href="https://www.linkedin.com/in/matthewkennedy24" class="button">LinkedIn</a></li>
 							</ul>
 						</div>
 					</section>
 
-				<!-- One -->
+				<!-- Skills -->
+					<section id="skills" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Technical Skills</h2>
+							<div class="features">
+								<section>
+									<span class="icon solid major fa-terminal"></span>
+									<h3>Languages</h3>
+									<p>C#, Razor, Python, SQL, JavaScript, TypeScript, XAML, HTML, Java, C/C++, MATLAB</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-layer-group"></span>
+									<h3>Frameworks</h3>
+									<p>Blazor, .NET, SyncFusion, Angular, Flask, Django, Pandas, Sklearn, Node.js, Crystal Reports</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-cloud"></span>
+									<h3>Cloud &amp; Dev Tools</h3>
+									<p>Visual Studio / VS Code, SSMS, GCP, Azure DevOps, GitHub, Railway, Jira</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-brain"></span>
+									<h3>AI Tools</h3>
+									<p>Claude Code (Custom Slash Commands, Skills, Agents), GitHub Copilot, OpenAI Codex, Figma</p>
+								</section>
+							</div>
+						</div>
+					</section>
+
+			<!-- One -->
 					<section id="one" class="wrapper style2 spotlights">
 						<section>
 							<a href="#" class="image"><img src="images/IMG-5961.JPG" alt="" data-position="center center" /></a>
 							<div class="content">
 								<div class="inner">
-									<h2>Work Experience</h2>
-									<p>Last Summer I worked as a Technical Consultant for Pariveda Solutions in Chicago, and our work was for a Pro-Bono client at the Lincoln Park Zoo.  I truly evolved as a professional during this time. I procured valuable experience with client facing work, Agile project management tactics, and full stack web development - to name only a few. I became proficient in Angular and GCP, and I grew in my abilities to communicate and display my work to both technical co-workers and less technical stakeholders. </p>
+									<h2>Benefit Finance Partners</h2>
+									<h3>Software Engineer &mdash; St. Louis, MO (June 2023 &ndash; Present)</h3>
+									<p>Building enterprise software for complex insurance and finance operations. Designed and shipped a 0&rarr;1 Blazor Server Client Portal for high-net-worth PPVA insurance products — currently the centerpiece of an active RFP with $1B+ AUM and 1,000+ users on the line. Also led full-stack development of a contract upload app supporting $500M+ in new assets, and championed company-wide adoption of Claude Code and ChatGPT.</p>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/IMG-5961.JPG" alt="" data-position="center center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Pariveda Solutions</h2>
+									<h3>Technical Consultant Intern &mdash; Chicago, IL (Summer 2023)</h3>
+									<p>Built an acoustic data processing pipeline enabling 10,000+ global users to validate results from an ML bird identification model for the Lincoln Park Zoo. Evolved the database architecture, built GCP Cloud Functions, and established a GCP bucket workflow integrating bird song audio and spectrogram images.</p>
 									<ul class="actions">
 										<li><a href="internship.html" class="button">Learn more</a></li>
 									</ul>
@@ -80,9 +122,26 @@
 				<!-- Two -->
 					<section id="two" class="wrapper style3 fade-up">
 						<div class="inner">
-							<h2>Some Projects and Hobbies</h2>
-							<p>Here are some of the things that you can expect me to be doing in my freetime, as well as some academic projects I have completed.</p>
+							<h2>Projects and Hobbies</h2>
+							<p>Here are some of the things that you can expect me to be doing in my free time, as well as some projects I've shipped.</p>
 							<div class="features">
+								<section>
+									<span class="icon solid major fa-robot"></span>
+									<h3>Ask GM</h3>
+									<p>Independently designed and shipped a full-stack AI web app that lets users chat conversationally with famous Chess Grandmasters — powered by LLM and Chess Engine APIs. Built end-to-end: frontend, backend API, and cloud deployment via Railway.</p>
+									<p><a href="https://askgm.up.railway.app" target="_blank"><b>Try Ask GM &rarr;</b></a></p>
+								</section>
+								<section>
+									<span class="icon solid major fa-code"></span>
+									<h3>US Cities Similarity Tool</h3>
+									<p>Built a Python-based tool scoring US city similarity using Dijkstra's algorithm and Pearson correlation — originally a Data Structures final project, now a standalone utility.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-desktop"></span>
+									<h3>Settlers of Catan AI Helper</h3>
+									<p>Integrating my interest in strategy board games with AI, I created a local web app that uses supervised and unsupervised learning methods to help you win in Catan.</p>
+									<p><a href="https://github.com/mattkennedy24/CSE30124-CatanProject">Check out the GitHub Repo</a></p>
+								</section>
 								<section>
 									<span class="icon solid major fa-fish"></span>
 									<h3>Fishing</h3>
@@ -92,23 +151,12 @@
 								<section>
 									<span class="icon solid major fa-golf-ball"></span>
 									<h3>Golfing</h3>
-									<p>My dad taught my brothers and I how to golf at a young age. Ever since, golfing has been our way to bond through friendly competition. Additionally, I worked at a local golf course for 5 years as an Honor Caddie and Overseer of Outdoor Operations.</p>
-								</section>
-								<section>
-									<span class="icon solid major fa-code"></span>
-									<h3>US Similarities Project</h3>
-									<p>As a final project for Data Structures, my team and I developed a directed weighted graph with US Cities as nodes and edges weighted by a similarity score algorithm to quantify how similar cities are to each other. </p>
-								</section>
-								<section>
-									<span class="icon solid major fa-desktop"></span>
-									<h3>Settlers of Catan AI Helper</h3>
-									<p>Integrating my interest in strategy board games with my final project for Introduction to Artificial Intelligence, I created a local web app that uses supervised and unsupervised learning methods to help you win in Catan.</p>
-									<p><a href="https://github.com/mattkennedy24/CSE30124-CatanProject">Check out the GitHub Repo</a></p>
+									<p>My dad taught my brothers and I how to golf at a young age. Ever since, golfing has been our way to bond through friendly competition. I also worked at a local golf course for 5 years as an Honor Caddie and Overseer of Outdoor Operations.</p>
 								</section>
 								<section>
 									<span class="icon solid major fa-tree"></span>
 									<h3>Energy Studies</h3>
-									<p>Inspired by my engineering background and passion for the outdoors, I picked up a Minor degree in Energy Studies to explore things such as renewable energy, net carbon zero goals, climate policy, and more.</p>
+									<p>Inspired by my engineering background and passion for the outdoors, I picked up a Minor degree in Energy Studies at Notre Dame — exploring renewable energy, net carbon zero goals, and climate policy.</p>
 								</section>
 								<!-- <section>
 									<span class="icon major fa-gem"></span>
