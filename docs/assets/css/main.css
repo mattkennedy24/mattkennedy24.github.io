@@ -3907,3 +3907,55 @@ input, select, textarea {
 			}
 
 		}
+/* Custom: travel gallery and inline clips */
+
+	.gallery {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 1em;
+		margin-top: 2em;
+	}
+
+		.gallery figure {
+			position: relative;
+			margin: 0;
+			overflow: hidden;
+			border-radius: 0.25em;
+			aspect-ratio: 4 / 5;
+			background: #1c2320;
+		}
+
+		.gallery img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.gallery figcaption {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			padding: 1.5em 0.75em 0.6em 0.75em;
+			background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
+			color: #ffffff;
+			font-size: 0.7em;
+			letter-spacing: 0.15em;
+			text-transform: uppercase;
+		}
+
+	video.clip {
+		display: block;
+		width: 100%;
+		margin: 0 0 1em 0;
+		border-radius: 0.25em;
+	}
+
+	@media screen and (max-width: 980px) {
+		.gallery { grid-template-columns: repeat(2, 1fr); }
+	}
+
+	@media screen and (max-width: 480px) {
+		.gallery { grid-template-columns: 1fr; }
+	}
