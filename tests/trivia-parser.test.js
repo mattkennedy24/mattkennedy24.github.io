@@ -272,3 +272,58 @@ test('all nine real samples together', () => {
 	assert.equal(results.length, 8);
 	assert.deepEqual(results.map((r) => r.game).sort(), ['connections', 'contexto', 'contexto', 'dozen', 'krillion', 'timeguessr', 'top5', 'wordle']);
 });
+
+/* ---- Fermi (real paste, including the duplicated title the share sheet adds) ---- */
+
+const FERMI = `Fermi
+
+Fermi No. 83
+
+Fermi · No. 83
+01  1.36×
+02  1,167×
+03  1.10×
+─────────
+11.4× score · top 62%
+<https://fermi.gg/s/daily>`;
+
+test('Fermi: the real paste (with the duplicated title) gives exactly one result', () => {
+	const { results, problems } = T.parse(FERMI);
+	assert.equal(problems.length, 0, problems.join('; '));
+	assert.equal(results.length, 1);
+	const r = results[0];
+	assert.deepEqual([r.game, r.puzzle, r.raw, r.score, r.detail], ['fermi', 83, '11.4×', 64.8, 'Top 62%']);
+});
+
+test('Fermi: the card alone (no share-sheet title) also works', () => {
+	const r = only(FERMI.split('\n').slice(4).join('\n'));
+	assert.deepEqual([r.puzzle, r.score], [83, 64.8]);
+});
+
+test('Fermi: log scale (1x = 100, 10x ~ 67, 1000x = 0) and clamping', () => {
+	assert.equal(T.fermiScore(1), 100);
+	assert.equal(T.fermiScore(0.5), 100);
+	assert.equal(T.fermiScore(10), 66.7);
+	assert.equal(T.fermiScore(100), 33.3);
+	assert.equal(T.fermiScore(1000), 0);
+	assert.equal(T.fermiScore(5000), 0);
+	assert.equal(T.fermiScore(0), null);
+});
+
+test('Fermi: a score with a comma and a zero-padded number is read correctly', () => {
+	const r = only('Fermi · No. 083\n01  2×\n02  3×\n03  4×\n─────────\n1,234× score · top 99%');
+	assert.deepEqual([r.puzzle, r.raw, r.score], [83, '1,234×', 0]);
+});
+
+test('Fermi: a bare title with no score is reported, not logged', () => {
+	const { results, problems } = T.parse('Fermi No. 83');
+	assert.equal(results.length, 0);
+	assert.equal(problems.length, 1);
+});
+
+test('Fermi pasted alongside other games does not swallow or duplicate anything', () => {
+	const { results, problems } = T.parse([WORDLE, FERMI, TIMEGUESSR].join('\n\n'));
+	assert.equal(problems.length, 0);
+	assert.deepEqual(results.map((r) => r.game), ['wordle', 'fermi', 'timeguessr']);
+	assert.equal(results[1].score, 64.8);
+});

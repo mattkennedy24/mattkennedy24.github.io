@@ -41,6 +41,13 @@
 		return round1(Math.max(10, base - 3 * (hints || 0)));
 	}
 
+	// Fermi: the score is a multiplier, how far off your estimates were, so 1x is perfect
+	// and lower is better. On a log scale: 1x = 100, 10x = 67, 100x = 33, 1,000x = 0.
+	function fermiScore(multiplier) {
+		if (!(multiplier > 0)) { return null; }
+		return round1(Math.max(0, Math.min(100, 100 * (1 - Math.log10(Math.max(1, multiplier)) / 3))));
+	}
+
 	// The Dozen: share of squares answered correctly, half credit for a correct
 	// answer after a double dip (purple).
 	function dozenScore(greens, purples, total) {
@@ -135,6 +142,20 @@
 			}
 		},
 		{
+			id: 'fermi', name: 'Fermi', url: 'https://fermi.gg',
+			rule: 'Your score is a multiplier of how far off your estimates were (1\u00D7 is perfect, lower is better), on a log scale: 1\u00D7 = 100, 10\u00D7 = 67, 100\u00D7 = 33, 1,000\u00D7 = 0.',
+			header: /Fermi\s*(?:[\u00B7\u2022|\-\u2013\u2014]\s*)?No\.?\s*0*(\d+)/gi,
+			parse: function (m, block) {
+				// The share sheet can put a bare "Fermi No. 83" title above the real card, so a
+				// block with no score line is "incomplete" and is dropped if a full one follows.
+				var sc = /([\d,]+(?:\.\d+)?)\s*[\u00D7x]\s*score/i.exec(block);
+				if (!sc) { return { incomplete: true }; }
+				var mult = parseFloat(sc[1].replace(/,/g, ''));
+				var top = /top\s*(\d+)\s*%/i.exec(block);
+				return { puzzle: toInt(m[1]), raw: sc[1] + '\u00D7', score: fermiScore(mult), detail: top ? 'Top ' + top[1] + '%' : '' };
+			}
+		},
+		{
 			id: 'dozen', name: 'The Dozen', url: 'https://dailydozentrivia.com',
 			rule: 'The share of questions answered correctly from the colour squares, with half credit for a correct answer after a double dip (purple).',
 			header: /The Dozen:?\s*Daily Trivia[ \t]*\n[ \t]*Game[ \t]*#?[ \t]*([\d,]+)/gi,
@@ -183,14 +204,20 @@
 		});
 		found.sort(function (a, b) { return a.index - b.index; });
 
-		var results = [], problems = [];
+		var results = [], problems = [], incomplete = [];
 		found.forEach(function (f, i) {
 			var end = i + 1 < found.length ? found[i + 1].index : src.length;
 			var parsed = f.game.parse(f.match, src.slice(f.index, end));
+			if (parsed.incomplete) { incomplete.push(f.game); return; }
 			if (parsed.problem) { problems.push(parsed.problem); return; }
 			parsed.game = f.game.id;
 			parsed.name = f.game.name;
 			results.push(parsed);
+		});
+		incomplete.forEach(function (game) {
+			if (!results.some(function (r) { return r.game === game.id; })) {
+				problems.push(game.name + ': I could not find the score in that paste.');
+			}
 		});
 		return { results: results, problems: problems };
 	}
@@ -263,6 +290,7 @@
 		wordleScore: wordleScore,
 		connectionsScore: connectionsScore,
 		contextoScore: contextoScore,
+		fermiScore: fermiScore,
 		dozenScore: dozenScore,
 		parseSlashDate: parseSlashDate,
 		timeguessrScore: timeguessrScore,
