@@ -40,13 +40,13 @@
 		</div>
 	</header>
 
-	<main id="main">
+	<main id="main" tabindex="-1">
 
 		<!-- Opening ------------------------------------------------------ -->
 		<section class="hero" id="top" aria-labelledby="hero-title">
 			<div class="wrap">
 				<div class="hero__rule"><p class="eyebrow" style="margin:0">Personal site &middot; St. Louis, MO</p></div>
-				<h1 id="hero-title"><span>Matt</span><span class="accent">Kennedy</span></h1>
+				<h1 id="hero-title"><span>Matt</span> <span class="accent">Kennedy</span></h1>
 				<p class="hero__dek">Lead AI Engineer &amp; Strategist at Benefit Finance Partners. I build full-stack software, shape how AI gets used on real codebases, and make things like <mark>Ask GM</mark> on the side.</p>
 				<div class="hero__cta">
 					<a class="btn" href="#craft">See the work</a>
@@ -135,12 +135,12 @@
 
 					<div class="job__body reveal">
 						<div class="company">
-							<span class="badge"><img src="images/bfp-logo.png" width="640" height="298" loading="lazy" alt="Benefit Finance Partners logo"></span>
+							<span class="badge"><img src="images/bfp-logo.png" width="640" height="298" loading="lazy" alt=""></span>
 							<h3>Benefit Finance Partners, LLP</h3>
 						</div>
 						<p class="company__meta">St. Louis, MO &middot; Jun 2023 &ndash; Present</p>
 
-						<section class="role" aria-labelledby="role-ai">
+						<div class="role">
 							<h4 class="role__title" id="role-ai">Lead AI Engineer &amp; Strategist</h4>
 							<p class="role__dates">Apr 2026 &ndash; Present</p>
 							<ul class="bullets">
@@ -149,11 +149,11 @@
 								<li>Codified the team&rsquo;s compile, test, and review gates for AI-generated changes: <strong>60+ static analysis rules</strong> across three severity tiers, a hook that compiles the solution after every file write, and a review step split between a Python scanner and the model.</li>
 								<li>Benchmarked that split approach against a model-only reviewer across three matched runs: <strong>1.8x more real violations caught (103 vs. 58)</strong> on 21% fewer tokens, 47% fewer tool calls, and 32% less wall-clock time. Two early runs came back contaminated, so I threw them out and reran rather than publish the better-looking numbers.</li>
 								<li>Wrote the Python evaluation harness before trusting either approach: a 24-file, 631-line test branch with violations planted across committed, staged, and unstaged changes, graded on 13 assertions.</li>
-								<li>Closed the loop so the configuration keeps improving on its own: session hooks log standards violations to a shared ledger, an analysis agent proposes rule and skill changes, and a person approves every change before it lands.</li>
+								<li>Closed the loop so the configuration keeps improving on its own: session hooks log standards violations to a shared, version-controlled ledger, an analysis agent proposes rule and skill changes, and a person approves every change before it lands.</li>
 							</ul>
-						</section>
+						</div>
 
-						<section class="role" aria-labelledby="role-swe">
+						<div class="role">
 							<h4 class="role__title" id="role-swe">Software Engineer</h4>
 							<p class="role__dates">Jun 2023 &ndash; Apr 2026</p>
 							<ul class="bullets">
@@ -161,7 +161,7 @@
 								<li>Led full-stack development of a contract upload application for <strong>2,000+ high-net-worth policies and annuities</strong>, supporting onboarding of more than <strong>$500M</strong> in new assets under management.</li>
 								<li>Drove company-wide adoption of generative AI tools, including secure ChatGPT and Claude Code licensing and internal best-practice training, which led directly to the creation of the AI Engineer &amp; Strategist role.</li>
 							</ul>
-						</section>
+						</div>
 					</div>
 				</article>
 
@@ -177,7 +177,7 @@
 						<div class="company"><h3>Pariveda Solutions</h3></div>
 						<p class="company__meta">Chicago, IL &middot; May 2023 &ndash; Aug 2023</p>
 
-						<section class="role" aria-labelledby="role-intern">
+						<div class="role">
 							<h4 class="role__title" id="role-intern">Technical Consultant Intern (Full Stack)</h4>
 							<p class="role__dates">Summer 2023</p>
 							<ul class="bullets">
@@ -185,7 +185,7 @@
 								<li>Extended the database architecture for new audio data and built GCP Cloud Functions and a storage bucket workflow to bring bird song audio and spectrogram images into the site.</li>
 							</ul>
 							<a class="more-link" href="internship.html">Read the full story &rarr;</a>
-						</section>
+						</div>
 					</div>
 				</article>
 			</div>
@@ -215,6 +215,8 @@
 				</div>
 
 				<p class="askgm-lead">Ask GM is a chess coaching web app. You play a game or study an opening, and you can ask questions about the position to AI versions of Magnus Carlsen, Hikaru Nakamura or Bobby Fischer. Each one answers in their own voice. The coaching is backed by a real chess engine running in your browser, so the advice reflects the actual position, not the model&rsquo;s guesses.</p>
+
+				<p class="askgm-disclaimer">Ask GM is an independent project. The grandmaster personas are AI-generated and are not affiliated with or endorsed by Magnus Carlsen, Hikaru Nakamura or Bobby Fischer&rsquo;s estate.</p>
 
 				<ul class="askgm-stats">
 					<li><strong>3</strong><span>AI grandmasters</span></li>
@@ -298,7 +300,7 @@
 
 				<div class="off">
 					<div class="off__golf reveal">
-						<video autoplay muted loop playsinline preload="metadata" poster="images/golf-swing-poster.jpg" aria-label="Matt Kennedy hitting a drive on a mountain golf course">
+						<video controls autoplay muted loop playsinline preload="metadata" poster="images/golf-swing-poster.jpg" aria-label="Matt Kennedy hitting a drive on a mountain golf course">
 							<source src="images/golf-swing.mp4" type="video/mp4">
 						</video>
 						<h3>Golf</h3>
@@ -360,6 +362,7 @@
 						<input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
 						<div><button class="btn" type="submit">Send message</button></div>
 						<p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+						<p class="form__note">Your message is sent through Formspree, a form service, and delivered to my inbox.</p>
 					</form>
 				</div>
 			</div>

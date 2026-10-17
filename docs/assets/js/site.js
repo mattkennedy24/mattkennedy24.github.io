@@ -128,14 +128,25 @@
 		var caption = qs('.carousel__caption', carousel);
 		var counter = qs('.carousel__count', carousel);
 		var playBtn = qs('[data-carousel="play"]', carousel);
+		var stage = qs('.carousel__stage', carousel);
 		var interval = parseInt(carousel.getAttribute('data-interval'), 10) || 4500;
 		var index = 0;
 		var timer = null;
 		var userPaused = reduceMotion;   // never auto-advance for people who asked for less motion
-		var hovering = false;
+		var hovered = false;
+		var focused = false;
+
+		// Blurred backdrops are loaded on demand: this slide and the next one
+		var loadBg = function (i) {
+			var bg = qs('.slide__bg', slides[(i + slides.length) % slides.length]);
+			if (bg && bg.getAttribute('data-bg') && !bg.style.backgroundImage) {
+				bg.style.backgroundImage = 'url(' + bg.getAttribute('data-bg') + ')';
+			}
+		};
 
 		var show = function (i) {
 			index = (i + slides.length) % slides.length;
+			loadBg(index); loadBg(index + 1);
 			slides.forEach(function (s, n) {
 				var on = n === index;
 				s.classList.toggle('is-active', on);
@@ -151,25 +162,32 @@
 		var stop = function () { if (timer) { window.clearInterval(timer); timer = null; } };
 		var start = function () {
 			stop();
-			if (!userPaused && !hovering && !doc.hidden) {
+			if (!userPaused && !hovered && !focused && !doc.hidden) {
 				timer = window.setInterval(function () { show(index + 1); }, interval);
 			}
 		};
 		var setPlayLabel = function () {
 			playBtn.textContent = userPaused ? '▶' : '❚❚';
 			playBtn.setAttribute('aria-label', userPaused ? 'Play slideshow' : 'Pause slideshow');
-			carousel.setAttribute('aria-live', userPaused ? 'polite' : 'off');
+			stage.setAttribute('aria-live', userPaused ? 'polite' : 'off');
 		};
 
 		qs('[data-carousel="prev"]', carousel).addEventListener('click', function () { show(index - 1); start(); });
 		qs('[data-carousel="next"]', carousel).addEventListener('click', function () { show(index + 1); start(); });
-		playBtn.addEventListener('click', function () { userPaused = !userPaused; setPlayLabel(); start(); });
+		playBtn.addEventListener('click', function () {
+			userPaused = !userPaused;
+			if (!userPaused) { hovered = false; focused = false; }   // an explicit Play wins over hover/focus pausing
+			setPlayLabel(); start();
+		});
 		dots.forEach(function (d, n) { d.addEventListener('click', function () { show(n); start(); }); });
 
-		carousel.addEventListener('mouseenter', function () { hovering = true; stop(); });
-		carousel.addEventListener('mouseleave', function () { hovering = false; start(); });
-		carousel.addEventListener('focusin', function () { hovering = true; stop(); });
-		carousel.addEventListener('focusout', function () { hovering = false; start(); });
+		// Hover only pauses for a real mouse (touch fires emulated hover that would stick)
+		carousel.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { hovered = true; stop(); } });
+		carousel.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') { hovered = false; start(); } });
+		carousel.addEventListener('focusin', function () { focused = true; stop(); });
+		carousel.addEventListener('focusout', function (e) {
+			if (!carousel.contains(e.relatedTarget)) { focused = false; start(); }
+		});
 		doc.addEventListener('visibilitychange', start);
 
 		carousel.addEventListener('keydown', function (e) {
@@ -178,7 +196,6 @@
 		});
 
 		// Swipe
-		var stage = qs('.carousel__stage', carousel);
 		var startX = null;
 		stage.addEventListener('pointerdown', function (e) { startX = e.clientX; });
 		stage.addEventListener('pointerup', function (e) {
@@ -197,18 +214,20 @@
 	/* Performance review viewer -------------------------------------------- */
 	var viewer = qs('.viewer');
 	if (viewer) {
-		var pages = JSON.parse(viewer.getAttribute('data-pages'));
+		var pages;
+		try { pages = JSON.parse(viewer.getAttribute('data-pages')); } catch (err) { pages = []; }
 		var img = qs('.viewer__page img', viewer);
 		var prev = qs('[data-viewer="prev"]', viewer);
 		var next = qs('[data-viewer="next"]', viewer);
 		var count = qs('.viewer__count', viewer);
 		var page = 0;
+		if (!pages.length) { return; }
 		var render = function () {
 			img.src = pages[page];
-			img.alt = 'Performance review, page ' + (page + 1) + ' of ' + pages.length;
+			img.alt = 'Performance review, page ' + (page + 1) + ' of ' + pages.length + ' (a scanned document; the PDF download has the same content)';
 			count.textContent = 'Page ' + (page + 1) + ' of ' + pages.length;
-			prev.disabled = page === 0;
-			next.disabled = page === pages.length - 1;
+			prev.setAttribute('aria-disabled', String(page === 0));
+			next.setAttribute('aria-disabled', String(page === pages.length - 1));
 		};
 		prev.addEventListener('click', function () { if (page > 0) { page--; render(); } });
 		next.addEventListener('click', function () { if (page < pages.length - 1) { page++; render(); } });
@@ -232,6 +251,7 @@
 			holder.appendChild(iframe);
 			holder.hidden = false;
 			demoBtn.hidden = true;
+			iframe.focus();
 		});
 	}
 })();

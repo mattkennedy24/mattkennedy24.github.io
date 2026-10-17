@@ -19,7 +19,6 @@
 :root {
 	--ink:        #101713;
 	--forest:     #16231d;
-	--forest-2:   #1d3027;
 	--paper:      #f9f7f1;
 	--paper-2:    #efe9da;
 	--text:       #191713;   /* text on paper */
@@ -115,15 +114,6 @@ mark {
 	padding-inline: var(--gutter);
 }
 
-.visually-hidden {
-	position: absolute !important;
-	width: 1px; height: 1px;
-	margin: -1px; padding: 0; border: 0;
-	overflow: hidden;
-	clip: rect(0 0 0 0);
-	white-space: nowrap;
-}
-
 .skip-link {
 	position: absolute;
 	left: var(--gutter);
@@ -174,6 +164,17 @@ mark {
 .sec--paper p, .sec--paper li { color: var(--text-2); }
 .sec--paper h2, .sec--paper h3, .sec--paper h4, .sec--paper strong { color: var(--text); }
 
+/* Yellow is a highlighter, not a text colour: on paper, links get an ink underline
+   and <mark> becomes a block highlight so everything stays readable. */
+.sec--paper a { text-decoration-color: currentColor; text-decoration-thickness: 0.08em; }
+.sec--paper a:hover { text-decoration-thickness: 0.16em; }
+.sec--paper mark {
+	text-decoration: none;
+	background: linear-gradient(transparent 62%, var(--hl) 62%);
+	padding: 0 0.04em;
+}
+.sec--paper .askgm-dek, .sec--paper .askgm-lead, .sec--paper .askgm-cta p { color: var(--text); }
+
 /* 4. Header + nav ------------------------------------------------------- */
 
 .site-header {
@@ -209,7 +210,6 @@ mark {
 	margin-left: 0.3rem;
 	background: var(--hl);
 }
-.wordmark:hover { text-decoration: none; }
 
 .nav-list { display: flex; gap: clamp(0.9rem, 1.8vw, 1.75rem); }
 
@@ -247,6 +247,7 @@ mark {
 	flex-direction: column;
 	justify-content: flex-end;
 	min-height: min(92vh, 58rem);
+	min-height: min(92svh, 58rem);
 	padding-block: clamp(3rem, 8vw, 5rem) 0;
 	background: var(--ink);
 	overflow: hidden;
@@ -532,8 +533,6 @@ mark {
 }
 .askgm-cta p { margin: 0; font-family: var(--serif); font-size: 1.2rem; color: var(--text); }
 .askgm-cta .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.5rem; }
-#askgm .btn { background: var(--text); color: var(--paper); }
-#askgm .btn:hover { background: var(--hl); color: var(--text); }
 
 .askgm-lead {
 	max-width: 40rem;
@@ -543,6 +542,8 @@ mark {
 	line-height: 1.55;
 	color: var(--text);
 }
+
+.askgm-disclaimer { max-width: 40rem; margin: -1.25rem 0 2.5rem; font-size: 0.82rem; font-style: italic; color: var(--text-2); }
 
 .askgm-stats {
 	display: flex;
@@ -590,8 +591,7 @@ mark {
 .off__side { display: grid; gap: clamp(2rem, 5vw, 3rem); }
 .off__item { padding-top: 1rem; border-top: 4px solid var(--text); }
 .tile img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; margin-bottom: 1rem; }
-.tile .btn { margin-top: 0.4rem; background: var(--text); color: var(--paper); }
-.tile .btn:hover { background: var(--hl); color: var(--text); }
+.tile .btn { margin-top: 0.4rem; }
 
 /* 12. Contact + form ---------------------------------------------------- */
 
@@ -641,6 +641,7 @@ mark {
 .form__status { min-height: 1.5em; margin: 0; font-size: 0.95rem; }
 .form__status[data-state="ok"] { color: var(--hl); }
 .form__status[data-state="error"] { color: #ffb4b0; }
+.form__note { margin: 0; font-size: 0.8rem; color: var(--on-dark-2); }
 .hp { position: absolute; left: -9999px; }
 
 /* 13. Footer ------------------------------------------------------------ */
@@ -678,7 +679,7 @@ mark {
 .viewer__page img { width: 100%; }
 .viewer__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
 .viewer__count { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-2); }
-.btn[disabled] { opacity: 0.35; cursor: not-allowed; }
+.btn[disabled], .btn[aria-disabled="true"] { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
 
 /* 15. Travel carousel --------------------------------------------------- */
 
@@ -687,6 +688,7 @@ mark {
 .carousel__stage {
 	position: relative;
 	height: clamp(24rem, 72vh, 46rem);
+	height: clamp(24rem, 72svh, 46rem);
 	background: var(--forest);
 	overflow: hidden;
 	touch-action: pan-y;
@@ -714,6 +716,8 @@ mark {
 	filter: blur(32px) brightness(0.5) saturate(1.1);
 }
 .slide img {
+	-webkit-user-drag: none;
+	user-select: none;
 	position: relative;
 	max-width: 100%;
 	max-height: 100%;
@@ -745,7 +749,7 @@ mark {
 .icon-btn:hover { background: var(--hl); color: var(--text); border-color: var(--hl); }
 
 .carousel__dots { display: flex; flex-wrap: wrap; gap: 0.5rem; grid-column: 1 / -1; padding-top: 0.25rem; }
-.dot { width: 2rem; height: 0.4rem; padding: 0; border: 0; background: var(--rule-dark); cursor: pointer; position: relative; }
+.dot { width: 2rem; height: 0.4rem; padding: 0; border: 0; background: #6f7a73; cursor: pointer; position: relative; }
 .dot::after { content: ""; position: absolute; inset: -0.6rem 0; }   /* larger tap target */
 .dot[aria-current="true"] { background: var(--hl); }
 
@@ -755,12 +759,23 @@ mark {
 .js .reveal.in { opacity: 1; transform: none; }
 .js .fig:not(.in) .bar__fill { width: 0; }
 
+/* No-JS fallbacks: show every travel photo, and hide controls that need JS */
+html:not(.js) .carousel__stage { height: auto; display: grid; gap: 1rem; background: none; overflow: visible; }
+html:not(.js) .slide { position: relative; inset: auto; height: 70vh; opacity: 1; visibility: visible; background: var(--forest); }
+html:not(.js) .carousel__ui, html:not(.js) .viewer__bar, html:not(.js) [data-demo] { display: none; }
+
+@media (forced-colors: active) {
+	.field input:focus, .field textarea:focus { outline: 2px solid Highlight; }
+}
+
 @media (max-width: 1060px) {
 	.nav-toggle { display: inline-block; }
 	.site-nav {
 		position: absolute;
 		inset: var(--header-h) 0 auto 0;
 		display: none;
+		max-height: calc(100vh - var(--header-h));
+		overflow-y: auto;
 		padding: 1rem var(--gutter) 1.75rem;
 		background: var(--ink);
 		border-bottom: 1px solid var(--rule-dark);
@@ -789,6 +804,8 @@ mark {
 	.askgm-cta { flex-direction: column; align-items: flex-start; }
 	.carousel__stage { height: clamp(20rem, 62vh, 30rem); }
 	.carousel__ui { grid-template-columns: 1fr; }
+	.dot { width: 1.5rem; }
+	.carousel__dots { gap: 0.4rem; }
 	.hero__cta .btn { flex: 1 1 100%; text-align: center; }
 }
 
@@ -800,6 +817,8 @@ mark {
 }
 
 @media print {
-	.site-header, .nav-toggle, .carousel__ui, .skip-link { display: none !important; }
-	body, .sec--ink, .sec--forest, .hero, .page-hero { background: #fff !important; color: #000 !important; }
+	.site-header, .nav-toggle, .carousel__ui, .skip-link, .hero::before { display: none !important; }
+	.js .reveal { opacity: 1 !important; transform: none !important; }
+	body, .sec, .hero, .page-hero, .site-footer { background: #fff !important; color: #000 !important; }
+	.sec *, .hero *, .page-hero *, .site-footer * { color: #000 !important; }
 }
