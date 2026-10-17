@@ -33,6 +33,35 @@
 	// TimeGuessr: points as a share of the maximum.
 	function timeguessrScore(points, max) { return max > 0 ? round1((points / max) * 100) : null; }
 
+	// Contexto: fewer guesses is better on a log scale (1 = 100, 10 = 75, 100 = 50),
+	// 3 points off per hint, never below 10 once solved. Giving up scores 0.
+	function contextoScore(guesses, hints, gaveUp) {
+		if (gaveUp) { return 0; }
+		var base = 100 - 25 * Math.log10(Math.max(1, guesses));
+		return round1(Math.max(10, base - 3 * (hints || 0)));
+	}
+
+	// The Dozen: share of squares answered correctly, half credit for a correct
+	// answer after a double dip (purple).
+	function dozenScore(greens, purples, total) {
+		return total > 0 ? round1(((greens + 0.5 * purples) / total) * 100) : null;
+	}
+
+	// Contexto prints a date instead of a puzzle number. US order (MM/DD/YYYY) unless
+	// the first number can only be a day. Returns { key: 'YYYY-MM-DD', id: 20260801 } or null.
+	function parseSlashDate(str) {
+		var m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(str);
+		if (!m) { return null; }
+		var a = +m[1], b = +m[2], y = +m[3];
+		var month = a, day = b;
+		if (a > 12 && b <= 12) { month = b; day = a; }
+		if (month < 1 || month > 12 || day < 1 || day > 31) { return null; }
+		var d = new Date(Date.UTC(y, month - 1, day));
+		if (d.getUTCMonth() !== month - 1) { return null; }
+		var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+		return { key: y + '-' + pad(month) + '-' + pad(day), id: y * 10000 + month * 100 + day };
+	}
+
 	/* Game registry ------------------------------------------------------- */
 
 	var SQUARES = ['🟨', '🟩', '🟦', '🟪'];   // yellow, green, blue, purple
@@ -68,6 +97,26 @@
 			}
 		},
 		{
+			id: 'contexto', name: 'Contexto', url: 'https://contexto.me',
+			rule: 'Fewer guesses is better on a log scale: 1 guess = 100, 10 = 75, 100 = 50. Each hint costs 3 points. Giving up scores 0.',
+			header: /I played contexto\.me\s+(#?[\d\/,]+)\s+(and got it in|but I gave up in)\s+([\d,]+)\s+guess(?:es)?(?:\s+and\s+([\d,]+)\s+(?:hint|tip)s?)?/gi,
+			parse: function (m) {
+				var guesses = toInt(m[3]);
+				var gaveUp = /gave up/i.test(m[2]);
+				var hints = m[4] ? toInt(m[4]) : 0;
+				var out = { raw: gaveUp ? 'gave up' : guesses + (guesses === 1 ? ' guess' : ' guesses') + (hints ? ' + ' + hints + (hints === 1 ? ' hint' : ' hints') : ''),
+					score: contextoScore(guesses, hints, gaveUp) };
+				if (m[1].charAt(0) === '#') {
+					out.puzzle = toInt(m[1].slice(1));
+				} else {
+					var d = parseSlashDate(m[1]);
+					if (!d) { return { problem: 'Contexto: I could not read the date ' + m[1] + '.' }; }
+					out.puzzle = d.id; out.label = m[1]; out.date = d.key;
+				}
+				return out;
+			}
+		},
+		{
 			id: 'timeguessr', name: 'TimeGuessr', url: 'https://timeguessr.com',
 			rule: 'Your points as a share of the 50,000 maximum.',
 			header: /TimeGuessr\s*#\s*(\d+)\s*[—–-]+\s*([\d,]+)\s*\/\s*([\d,]+)/gi,
@@ -83,6 +132,26 @@
 			parse: function (m, block) {
 				var pts = /^[ \t]*([\d,]+)[ \t]*$/m.exec(block.slice(m[0].length));
 				return { puzzle: toInt(m[1]), raw: pts ? pts[1] + ' pts' : 'played', score: null };
+			}
+		},
+		{
+			id: 'dozen', name: 'The Dozen', url: 'https://dailydozentrivia.com',
+			rule: 'The share of questions answered correctly from the colour squares, with half credit for a correct answer after a double dip (purple).',
+			header: /The Dozen:?\s*Daily Trivia[ \t]*\n[ \t]*Game[ \t]*#?[ \t]*([\d,]+)/gi,
+			parse: function (m, block) {
+				var DOZEN_SQUARES = ['\uD83D\uDFE5', '\uD83D\uDFE9', '\uD83D\uDFEA'];   // red, green, purple
+				var cells = [];
+				block.split('\n').forEach(function (line) {
+					var chars = Array.from(line.trim());
+					if (chars.length && chars.every(function (c) { return DOZEN_SQUARES.indexOf(c) !== -1; })) { cells = cells.concat(chars); }
+				});
+				if (!cells.length) { return { problem: 'The Dozen: I could not find the colour squares.' }; }
+				var greens = cells.filter(function (c) { return c === DOZEN_SQUARES[1]; }).length;
+				var purples = cells.filter(function (c) { return c === DOZEN_SQUARES[2]; }).length;
+				var out = { puzzle: toInt(m[1]), raw: (greens + purples) + '/' + cells.length + ' correct', score: dozenScore(greens, purples, cells.length) };
+				var pts = /Score:\s*([\d,]+)/i.exec(block), time = /Time\s+(\d+:\d{2})/i.exec(block);
+				out.detail = [pts ? 'Score ' + pts[1] : '', time ? time[1] : ''].filter(Boolean).join(', ');
+				return out;
 			}
 		},
 		{
@@ -193,6 +262,9 @@
 		parse: parse,
 		wordleScore: wordleScore,
 		connectionsScore: connectionsScore,
+		contextoScore: contextoScore,
+		dozenScore: dozenScore,
+		parseSlashDate: parseSlashDate,
 		timeguessrScore: timeguessrScore,
 		dailyScore: dailyScore,
 		currentStreak: currentStreak,

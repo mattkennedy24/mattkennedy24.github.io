@@ -156,3 +156,119 @@ test('per-game averages and overall average', () => {
 	assert.equal(g.krillion.played, 1);
 	assert.equal(T.overallAverage(days), 48.8);   // (55 + 42.5) / 2 = 48.75, shown to one decimal
 });
+
+/* ---- Real pastes: Connections (real), Contexto (two variants), The Dozen ---- */
+
+const REAL_CONNECTIONS = `Connections
+Puzzle #1224
+🟨🟨🟨🟨
+🟩🟩🟩🟩
+🟪🟪🟪🟪
+🟦🟦🟦🟦`;
+
+const CONTEXTO_WIN = `I played contexto.me 08/01/2026 and got it in 1 guesses.
+
+🟩 1
+ 0
+ 0`;
+
+const CONTEXTO_GAVE_UP = `I played contexto.me 08/02/2026 but I gave up in 12 guesses and 9 hints.
+
+🟩🟩🟩🟩 16
+🟨 1
+🟥 4`;
+
+const DOZEN = `The Dozen: Daily Trivia
+Game 1182
+
+Score: 5
+🟥🟥🟥
+🟥🟥🟩
+🟥🟥🟥
+1 Correct, Time 03:04
+
+DailyDozenTrivia.com
+
+@TheDozenTrivia x @BarstoolSports
+#TheDailyDozen`;
+
+test('Connections: the real paste (a perfect run) scores 100', () => {
+	const r = only(REAL_CONNECTIONS);
+	assert.deepEqual([r.game, r.puzzle, r.raw, r.score], ['connections', 1224, 'perfect', 100]);
+});
+
+test('Contexto: a one-guess win; date becomes the puzzle id and the filing day', () => {
+	const r = only(CONTEXTO_WIN);
+	assert.equal(r.game, 'contexto');
+	assert.equal(r.score, 100);
+	assert.equal(r.raw, '1 guess');
+	assert.equal(r.date, '2026-08-01');
+	assert.equal(r.puzzle, 20260801);
+	assert.equal(r.label, '08/01/2026');
+});
+
+test('Contexto: giving up scores 0 and still counts as played', () => {
+	const r = only(CONTEXTO_GAVE_UP);
+	assert.deepEqual([r.score, r.raw, r.date], [0, 'gave up', '2026-08-02']);
+});
+
+test('Contexto: log-scale scoring and hint penalty', () => {
+	assert.equal(T.contextoScore(10, 0, false), 75);
+	assert.equal(T.contextoScore(100, 0, false), 50);
+	assert.equal(T.contextoScore(100, 2, false), 44);
+	assert.equal(T.contextoScore(100000, 0, false), 10);   // floor once solved
+	assert.equal(T.contextoScore(5, 0, true), 0);
+});
+
+test('Contexto: numbered form and "tips" wording are also understood', () => {
+	const r = only('I played contexto.me #1145 and got it in 54 guesses and 3 tips.');
+	assert.deepEqual([r.puzzle, r.date, r.raw], [1145, undefined, '54 guesses + 3 hints']);
+});
+
+test('Contexto dates: US order by default, day-first when unambiguous, bad dates rejected', () => {
+	assert.equal(T.parseSlashDate('08/01/2026').key, '2026-08-01');
+	assert.equal(T.parseSlashDate('25/12/2026').key, '2026-12-25');
+	assert.equal(T.parseSlashDate('13/13/2026'), null);
+	assert.equal(T.parseSlashDate('02/30/2026'), null);
+	const { results, problems } = T.parse('I played contexto.me 13/13/2026 and got it in 4 guesses.');
+	assert.equal(results.length, 0);
+	assert.equal(problems.length, 1);
+});
+
+test('The Dozen: game number, grid score, and detail line', () => {
+	const r = only(DOZEN);
+	assert.equal(r.game, 'dozen');
+	assert.equal(r.puzzle, 1182);
+	assert.equal(r.raw, '1/9 correct');
+	assert.equal(r.score, 11.1);
+	assert.equal(r.detail, 'Score 5, 03:04');
+});
+
+test('The Dozen: purple (correct after a double dip) earns half credit', () => {
+	assert.equal(T.dozenScore(1, 1, 9), 16.7);
+	const r = only('The Dozen: Daily Trivia\nGame 1183\n\nScore: 9\n🟩🟪🟥\n🟩🟩🟥\n🟥🟥🟥\n3 Correct, Time 01:00');
+	assert.equal(r.raw, '4/9 correct');
+	assert.equal(r.score, 38.9);   // (3 + 0.5) / 9
+});
+
+test('The Dozen: no squares is reported, not guessed', () => {
+	const { results, problems } = T.parse('The Dozen: Daily Trivia\nGame 1184\nScore: 0');
+	assert.equal(results.length, 0);
+	assert.equal(problems.length, 1);
+});
+
+test('everything pasted at once, exactly as sent, parses into the right games', () => {
+	const blob = [REAL_CONNECTIONS, CONTEXTO_WIN, CONTEXTO_GAVE_UP, DOZEN].join('\n');   // no blank lines between games
+	const { results, problems } = T.parse(blob);
+	assert.equal(problems.length, 0, problems.join('; '));
+	assert.deepEqual(results.map((r) => r.game), ['connections', 'contexto', 'contexto', 'dozen']);
+	assert.deepEqual(results.map((r) => r.score), [100, 100, 0, 11.1]);
+});
+
+test('all nine real samples together', () => {
+	const all = [TOP5, KRILLION, TIMEGUESSR, WORDLE, REAL_CONNECTIONS, CONTEXTO_WIN, CONTEXTO_GAVE_UP, DOZEN].join('\n\n');
+	const { results, problems } = T.parse(all);
+	assert.equal(problems.length, 0, problems.join('; '));
+	assert.equal(results.length, 8);
+	assert.deepEqual(results.map((r) => r.game).sort(), ['connections', 'contexto', 'contexto', 'dozen', 'krillion', 'timeguessr', 'top5', 'wordle']);
+});

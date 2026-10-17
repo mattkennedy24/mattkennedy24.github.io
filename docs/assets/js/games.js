@@ -69,6 +69,7 @@
 					score: score
 				};
 				if (e.detail) { entry.detail = String(e.detail).slice(0, 120); }
+				if (e.label) { entry.label = String(e.label).slice(0, 40); }
 				(days[k] || (days[k] = {}))[id] = entry;
 			});
 		});
@@ -208,13 +209,18 @@
 		var seen = puzzleIndex();
 		var addedToday = {};
 		var counts = { added: 0, skipped: 0 };
+		var touched = {};
 		out.results.forEach(function (r) {
 			var state, note;
+			// A date printed in the share text (Contexto) wins over the date picker.
+			var rday = r.date || day;
 			var elsewhere = seen[r.game + ':' + r.puzzle];
-			var existing = data.days[day] && data.days[day][r.game];
-			if (addedToday[r.game]) {
+			var existing = data.days[rday] && data.days[rday][r.game];
+			if (rday > todayKey()) {
+				state = 'skipped'; note = 'that date is in the future';
+			} else if (addedToday[r.game + ':' + rday]) {
 				state = 'skipped'; note = 'one result per game per day';
-			} else if (elsewhere && elsewhere !== day) {
+			} else if (elsewhere && elsewhere !== rday) {
 				state = 'skipped'; note = 'already logged on ' + prettyDay(elsewhere);
 			} else if (existing && existing.puzzle === r.puzzle) {
 				state = 'skipped'; note = 'already logged';
@@ -222,22 +228,26 @@
 				state = existing ? 'updated' : 'added';
 				var entry = { name: r.name, puzzle: r.puzzle, raw: r.raw, score: r.score };
 				if (r.detail) { entry.detail = r.detail; }
-				(data.days[day] || (data.days[day] = {}))[r.game] = entry;
-				addedToday[r.game] = true;
+				if (r.label) { entry.label = r.label; }
+				(data.days[rday] || (data.days[rday] = {}))[r.game] = entry;
+				addedToday[r.game + ':' + rday] = true;
+				touched[rday] = true;
 			}
 			if (state === 'skipped') { counts.skipped++; } else { counts.added++; }
 
 			var li = el('li');
 			var left = el('span');
-			left.appendChild(el('strong', null, r.name + ' #' + r.puzzle.toLocaleString()));
+			left.appendChild(el('strong', null, r.name + ' ' + (r.label || '#' + r.puzzle.toLocaleString())));
 			left.appendChild(document.createTextNode(' · ' + r.raw));
 			li.appendChild(left);
-			li.appendChild(el('span', null, state === 'skipped' ? 'Skipped: ' + note : (r.score === null ? 'Logged (not scored yet)' : 'Score ' + fmt(r.score)) + (state === 'updated' ? ' · updated' : '')));
+			li.appendChild(el('span', null, state === 'skipped' ? 'Skipped: ' + note : (r.score === null ? 'Logged (not scored yet)' : 'Score ' + fmt(r.score)) + (state === 'updated' ? ' · updated' : '') + (r.date && state !== 'skipped' ? ' · filed under ' + prettyDay(rday) : '')));
 			els.parsed.appendChild(li);
 		});
 
 		if (counts.added) { save(); }
-		var parts = [counts.added + (counts.added === 1 ? ' result' : ' results') + ' added for ' + prettyDay(day)];
+		var touchedDays = Object.keys(touched);
+		var where = touchedDays.length === 1 ? prettyDay(touchedDays[0]) : touchedDays.length + ' days';
+		var parts = [counts.added + (counts.added === 1 ? ' result' : ' results') + ' added' + (counts.added ? ' for ' + where : '')];
 		if (counts.skipped) { parts.push(counts.skipped + ' skipped'); }
 		if (out.problems.length) { parts.push(out.problems[0]); }
 		say(parts.join('. ') + '.', counts.added ? 'ok' : 'error');
