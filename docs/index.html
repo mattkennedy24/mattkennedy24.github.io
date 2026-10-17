@@ -17,7 +17,8 @@
 							<li><a href="#intro">Welcome</a></li>
 							<li><a href="#about">About</a></li>
 								<li><a href="#one">Work Experience</a></li>
-							<li><a href="#two">Projects and Hobbies</a></li>
+							<li><a href="#askgm">Ask GM</a></li>
+								<li><a href="#two">Projects and Hobbies</a></li>
 								<li><a href="#skills">Skills</a></li>
 								<li><a href="#travel">Travel</a></li>
 							<li><a href="#three">Get in Touch</a></li>
@@ -113,6 +114,69 @@
 							</section>
 						</section>
 
+					<!-- Featured project: Ask GM -->
+					<section id="askgm" class="wrapper fade-up">
+						<div class="inner">
+							<p class="eyebrow">Featured project <span class="beta">Beta</span></p>
+							<h2 class="askgm-title">Ask <em>GM</em></h2>
+							<p class="askgm-dek">An AI chess coach. Ask grandmasters about the position on your board.</p>
+
+							<figure class="askgm-video">
+								<video id="askgmVideo" controls autoplay muted loop playsinline preload="metadata" poster="images/ask-gm-poster.jpg">
+									<source src="images/ask-gm-promo.mp4" type="video/mp4" />
+									Your browser can&rsquo;t play this video.
+								</video>
+								<figcaption>A 30-second tour of Ask GM. Plays muted; use the controls for sound.</figcaption>
+							</figure>
+
+							<div class="askgm-cta">
+								<p>Ask GM is in private beta. Request a beta code and I&rsquo;ll email it to you.</p>
+								<p>
+									<a href="#three" class="askgm-btn" data-prefill="Hi Matt, I&rsquo;d love a beta code for Ask GM. Thanks!">Request beta access</a>
+									<a href="https://askgm.up.railway.app" class="askgm-link" target="_blank" rel="noopener">Open the app (beta code required) &rarr;</a>
+								</p>
+							</div>
+
+							<p class="askgm-lead">Ask GM is a chess coaching web app. You play a game or study an opening, and you can ask questions about the position to AI versions of Magnus Carlsen, Hikaru Nakamura or Bobby Fischer. Each one answers in their own voice. The coaching is backed by a real chess engine running in your browser, so the advice reflects the actual position, not the model&rsquo;s guesses.</p>
+
+							<ul class="askgm-stats">
+								<li><strong>3</strong><span>AI grandmasters</span></li>
+								<li><strong>467</strong><span>unit tests</span></li>
+								<li><strong>50+</strong><span>openings, engine-checked</span></li>
+							</ul>
+
+							<div class="askgm-cols">
+								<div>
+									<h3>What it does</h3>
+									<ul>
+										<li><strong>Play and analyse:</strong> Move pieces by clicking or dragging. Stockfish runs in the browser and shows the evaluation and the top three lines, and you can preview any line on the board.</li>
+										<li><strong>Talk to a grandmaster:</strong> Ask anything about the position and get a conversational reply. Moves in the reply can be clicked to play them, and suggested follow-up questions keep the conversation going. Each grandmaster keeps their own conversation, and starting a new game starts a fresh one.</li>
+										<li><strong>Move-by-move review:</strong> Every move gets a verdict (best, good, inaccuracy, mistake, blunder), worked out from the engine&rsquo;s evaluations before and after it. Import a game as PGN and it&rsquo;s reviewed move by move, then summed up.</li>
+										<li><strong>Opening lessons:</strong> A searchable library of annotated openings and variations with auto-play. Every line is checked by Stockfish.</li>
+										<li><strong>Stays in character:</strong> Off-topic questions get a short, funny brush-off from the grandmaster.</li>
+									</ul>
+								</div>
+								<div>
+									<h3>How it&rsquo;s built</h3>
+									<ul>
+										<li><strong>Frontend:</strong> React, TypeScript and Tailwind, with a custom &ldquo;newspaper games page&rdquo; design system (paper and ink, two typefaces, no shadows). Built for laptops and iPhones.</li>
+										<li><strong>Backend:</strong> Node/Express API calling Anthropic&rsquo;s Claude, deployed on Railway.</li>
+										<li><strong>Engine:</strong> Stockfish compiled to WebAssembly, with a second background engine that reviews the moves you&rsquo;re not looking at.</li>
+									</ul>
+								</div>
+								<div>
+									<h3>Technical highlights</h3>
+									<ul>
+										<li><strong>The coach is grounded in facts:</strong> Before the model sees a question, the server computes facts about the position: which pieces can be won by exchanges, pawn structure, king safety and the game result. The model explains the position; it doesn&rsquo;t have to work it out.</li>
+										<li><strong>Browser input isn&rsquo;t trusted:</strong> The server replays the move list itself, accepts only a fixed vocabulary for move verdicts, and validates every field before it reaches the prompt.</li>
+										<li><strong>Tested end to end:</strong> 467 unit tests, Playwright browser tests on laptop and phone screen sizes, and scripted Stockfish checks of every opening line and of the coach&rsquo;s tactical claims.</li>
+										<li><strong>Design rules enforced by tests:</strong> The build fails if a component uses a colour, font size or style outside the design system.</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</section>
+
 					<!-- Two -->
 					<section id="two" class="wrapper style3 fade-up">
 						<div class="inner">
@@ -120,12 +184,12 @@
 							<p>Here are some of the things that you can expect me to be doing in my freetime, as well as some academic projects I have completed.</p>
 							<div class="features">
 								<section>
-									<span class="icon solid major fa-chess-knight"></span>
-									<h3>Ask GM &mdash; Chess Grandmaster AI</h3>
+										<span class="icon solid major fa-chess-knight"></span>
+										<h3>Ask GM &mdash; AI Chess Coach</h3>
 										<p><em>Full-Stack AI Web App, deployed on Railway &middot; 2025 &ndash; Present</em></p>
-										<p>A beta web app pairing LLM and chess engine APIs so you can play and talk through positions with famous grandmasters. Move pieces on a live board, study engine-suggested moves, and ask Magnus Carlsen, Bobby Fischer, or Hikaru Nakamura anything &mdash; the best move, the idea behind a position, why the engine likes a line. Includes 50+ opening lessons with variations. I built the frontend, backend API, and Railway deployment.</p>
-									<p><em>Currently in beta.</em> <a href="mailto:mattkenn006@gmail.com?subject=AskGM%20Access%20Request">Email me to request access</a> or visit <a href="https://askgm.up.railway.app" target="_blank" rel="noopener">askgm.up.railway.app</a>.</p>
-								</section>
+										<p>A chess coaching app where you ask AI grandmasters about your position. Answers are grounded in a Stockfish engine running in the browser and in facts the server computes about the position. Built with React, TypeScript, Node and Claude.</p>
+										<p><a href="#askgm">Watch the demo and request beta access</a></p>
+									</section>
 								<section>
 									<span class="icon solid major fa-fish"></span>
 									<h3>Fishing</h3>
@@ -224,15 +288,15 @@
 										<div class="fields">
 											<div class="field half">
 												<label for="name">Name</label>
-												<input type="text" name="name" id="name" />
+												<input type="text" name="name" id="name" autocomplete="name" />
 											</div>
 											<div class="field half">
 												<label for="email">Email</label>
-												<input type="text" name="email" id="email" />
+												<input type="email" name="email" id="email" required autocomplete="email" />
 											</div>
 											<div class="field">
 												<label for="message">Message</label>
-												<textarea name="message" id="message" rows="5"></textarea>
+												<textarea name="message" id="message" rows="5" required></textarea>
 											</div>
 										</div>
 										<ul class="actions">
@@ -266,6 +330,23 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				// Ask GM: respect reduced-motion, and prefill the beta-access message in the contact form
+				(function () {
+					var v = document.getElementById('askgmVideo');
+					if (v && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+						v.removeAttribute('autoplay'); v.pause();
+					}
+					var links = document.querySelectorAll('[data-prefill]');
+					for (var i = 0; i < links.length; i++) {
+						links[i].addEventListener('click', function () {
+							var m = document.getElementById('message');
+							if (m && !m.value.trim()) { m.value = this.getAttribute('data-prefill'); }
+							setTimeout(function () { var n = document.getElementById('name'); if (n) { n.focus({ preventScroll: true }); } }, 900);
+						});
+					}
+				})();
+			</script>
 
 	</body>
 </html>

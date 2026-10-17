@@ -3959,3 +3959,196 @@ input, select, textarea {
 	@media screen and (max-width: 480px) {
 		.gallery { grid-template-columns: 1fr; }
 	}
+
+/* Custom: Ask GM featured project (paper and ink, after the app's own design system) */
+
+	#askgm {
+		background: #f9f7f1;
+		color: #191713;
+		font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', Palatino, serif;
+	}
+
+		#askgm h2, #askgm h3, #askgm strong, #askgm .eyebrow, #askgm .askgm-stats span, #askgm figcaption {
+			color: #191713;
+		}
+
+		#askgm p, #askgm li { color: #3b362d; }
+
+		#askgm a { color: #191713; }
+
+		#askgm .eyebrow {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 0.75em;
+			letter-spacing: 0.25em;
+			text-transform: uppercase;
+			margin: 0 0 1em 0;
+			color: #191713;
+		}
+
+			#askgm .eyebrow .beta {
+				display: inline-block;
+				margin-left: 0.75em;
+				padding: 0.15em 0.6em;
+				border: 1px solid #c4262e;
+				color: #c4262e;
+				border-radius: 2em;
+			}
+
+		#askgm .askgm-title {
+			font-size: 7.5em;
+			line-height: 0.95;
+			letter-spacing: -0.02em;
+			font-weight: 700;
+			margin: 0 0 0.15em 0;
+			border-top: 4px solid #191713;
+			padding-top: 0.15em;
+			text-transform: none;
+		}
+
+			#askgm .askgm-title em {
+				font-style: italic;
+				background: linear-gradient(transparent 58%, #fdd80f 58%);
+				padding: 0 0.08em;
+			}
+
+		#askgm .askgm-dek {
+			font-size: 1.6em;
+			line-height: 1.35;
+			max-width: 32em;
+			margin: 0 0 1.5em 0;
+			color: #191713;
+		}
+
+		#askgm .askgm-video {
+			margin: 0 0 1.5em 0;
+		}
+
+			#askgm .askgm-video video {
+				display: block;
+				width: 100%;
+				height: auto;
+				aspect-ratio: 16 / 9;
+				background: #f9f7f1;
+				border: 1px solid #191713;
+			}
+
+			#askgm .askgm-video figcaption {
+				font-size: 0.85em;
+				font-style: italic;
+				margin-top: 0.6em;
+				color: #6b6457;
+			}
+
+		#askgm .askgm-cta {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1em 2em;
+			padding: 1.25em 0;
+			margin-bottom: 2.5em;
+			border-top: 1px solid #191713;
+			border-bottom: 1px solid #191713;
+		}
+
+			#askgm .askgm-cta p { margin: 0; font-size: 1.1em; }
+
+			#askgm .askgm-btn {
+				display: inline-block;
+				padding: 0.9em 1.7em;
+				margin-right: 1.25em;
+				background: #191713;
+				color: #f9f7f1 !important;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 0.75em;
+				letter-spacing: 0.2em;
+				text-transform: uppercase;
+				text-decoration: none;
+				border: 0;
+				border-radius: 0.25em;
+				transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+			}
+
+				#askgm .askgm-btn:hover { background: #fdd80f; color: #191713 !important; }
+
+			#askgm .askgm-link {
+				font-size: 0.95em;
+				text-decoration: underline;
+				text-underline-offset: 0.2em;
+			}
+
+		#askgm .askgm-lead {
+			font-size: 1.35em;
+			line-height: 1.6;
+			max-width: 38em;
+			margin: 0 0 2em 0;
+			color: #191713;
+		}
+
+		#askgm .askgm-stats {
+			display: flex;
+			flex-wrap: wrap;
+			list-style: none;
+			margin: 0 0 3em 0;
+			padding: 0;
+			border-top: 1px solid #191713;
+			border-bottom: 1px solid #191713;
+		}
+
+			#askgm .askgm-stats li {
+				flex: 1 1 10em;
+				padding: 1em 1em 1em 0;
+				text-align: left;
+			}
+
+			#askgm .askgm-stats strong {
+				display: block;
+				font-size: 3em;
+				line-height: 1;
+				font-weight: 700;
+			}
+
+			#askgm .askgm-stats span {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 0.7em;
+				letter-spacing: 0.15em;
+				text-transform: uppercase;
+			}
+
+		#askgm .askgm-cols {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 2.5em;
+		}
+
+			#askgm .askgm-cols h3 {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 0.8em;
+				letter-spacing: 0.2em;
+				text-transform: uppercase;
+				border-top: 4px solid #191713;
+				padding-top: 0.75em;
+				margin-bottom: 1em;
+			}
+
+			#askgm .askgm-cols ul { list-style: none; padding-left: 0; margin: 0; }
+
+			#askgm .askgm-cols li {
+				padding-left: 0;
+				margin-bottom: 1em;
+				font-size: 0.95em;
+				line-height: 1.6;
+			}
+
+	@media screen and (max-width: 980px) {
+		#askgm .askgm-title { font-size: 5.5em; }
+		#askgm .askgm-cols { grid-template-columns: 1fr; gap: 1.5em; }
+	}
+
+	@media screen and (max-width: 480px) {
+		#askgm .askgm-title { font-size: 4em; }
+		#askgm .askgm-dek { font-size: 1.25em; }
+		#askgm .askgm-lead { font-size: 1.1em; }
+		#askgm .askgm-btn { margin-right: 0; margin-bottom: 0.75em; }
+		#askgm .askgm-link { display: block; }
+	}
