@@ -4,14 +4,14 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Daily games — Matt Kennedy</title>
-	<meta name="description" content="The daily puzzles I play, and a scorecard that tracks your streak and average on your own device.">
+	<meta name="description" content="The daily puzzles I play, and a scorecard that scores your day and tracks your streak on your own device.">
 	<meta name="theme-color" content="#101713">
 	<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 	<link rel="canonical" href="https://mattkennedy24.github.io/games.html">
 	<meta property="og:url" content="https://mattkennedy24.github.io/games.html">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta property="og:title" content="Daily games — Matt Kennedy">
-	<meta property="og:description" content="The daily puzzles I play, and a scorecard that tracks your streak and average on your own device.">
+	<meta property="og:description" content="The daily puzzles I play, and a scorecard that scores your day and tracks your streak on your own device.">
 	<meta property="og:image" content="https://mattkennedy24.github.io/images/og-card.jpg">
 	<script>document.documentElement.className += ' js';</script>
 	<link rel="stylesheet" href="assets/css/site.css">
@@ -42,7 +42,7 @@
 			<div class="wrap">
 				<div class="hero__rule"><p class="eyebrow" style="margin:0">05 &mdash; Off the clock</p></div>
 				<h1>Daily games.</h1>
-				<p class="hero__dek">The puzzles I play every day, and a scorecard that keeps your streak. It all stays in your browser.</p>
+				<p class="hero__dek">The puzzles I play every day, and a scorecard that turns your day into one score. It all stays in your browser.</p>
 			</div>
 		</section>
 
@@ -50,37 +50,64 @@
 			<div class="wrap">
 				<div class="tool">
 					<div>
-						<h2 class="tool__title" id="log-title">Log your results</h2>
-						<p class="tool__lede">Play, tap Share in the game, and paste the text here. Paste several at once if you like.</p>
+						<h2 class="tool__title" id="log-title">Log your games</h2>
+						<p class="tool__lede">Pick a game, paste what its Share button gives you, and add it. When your card is full, score your day.</p>
 						<noscript><p class="hint">The scorecard needs JavaScript to read and save your results.</p></noscript>
 						<form id="log-form" novalidate>
-							<div class="pfield">
-								<label for="paste">Paste your results</label>
-								<textarea id="paste" spellcheck="false" autocomplete="off" placeholder="Wordle 1,946 5/6&#10;&#10;&#11035;&#11035;&#11035;&#11035;&#129001;&#10;..."></textarea>
-							</div>
 							<div class="pfield">
 								<label for="day">Results are from</label>
 								<input type="date" id="day">
 							</div>
+							<div class="pfield">
+								<label for="game">Game</label>
+								<div class="pfield__row">
+									<select id="game"></select>
+									<a id="play-link" class="play-link" href="#" target="_blank" rel="noopener">Play</a>
+								</div>
+							</div>
+							<div class="pfield">
+								<label for="paste">Paste your result</label>
+								<textarea id="paste" spellcheck="false" autocomplete="off"></textarea>
+							</div>
 							<div class="tool__actions">
-								<button class="btn" type="submit">Add to scorecard</button>
+								<button class="btn" type="submit">Add game</button>
 							</div>
 							<p class="tool__status" id="log-status" role="status" aria-live="polite"></p>
-							<ul class="parsed" id="parsed" aria-label="What was read from your paste"></ul>
 						</form>
 					</div>
 
-					<div>
-						<dl class="stats" aria-label="Your scorecard">
-							<div><dt>Current streak</dt><dd id="stat-streak">0</dd></div>
-							<div><dt>Best streak</dt><dd id="stat-best">0</dd></div>
-							<div><dt>Days logged</dt><dd id="stat-days">0</dd></div>
-							<div><dt>Games logged</dt><dd id="stat-games">0</dd></div>
-							<div><dt>Average score</dt><dd id="stat-avg">&mdash;</dd></div>
-							<div><dt id="stat-day-label">Score</dt><dd id="stat-day">&mdash;</dd></div>
+					<div class="card">
+						<h3 class="card__title">Today&rsquo;s card</h3>
+						<p class="hint" id="card-empty">Nothing added yet.</p>
+						<ul class="cardlist" id="card-list"></ul>
+						<dl class="stats stats--card" aria-label="Card totals">
+							<div><dt>Average</dt><dd id="card-avg">&mdash;</dd></div>
+							<div><dt>Total</dt><dd id="card-total">0</dd></div>
+							<div><dt>Stars</dt><dd id="card-stars">0</dd></div>
 						</dl>
+						<p class="hint" id="remaining"></p>
+						<div class="tool__actions">
+							<button class="btn" type="button" id="btn-submit" disabled>Score my day</button>
+						</div>
+						<p class="tool__status" id="submit-status" role="status" aria-live="polite"></p>
 					</div>
 				</div>
+			</div>
+		</section>
+
+		<section class="sec sec--paper sec--tight" aria-labelledby="stats-title">
+			<div class="wrap">
+				<h2 class="tool__title" id="stats-title">Your scorecard</h2>
+				<dl class="stats stats--wide" aria-label="Your scorecard">
+					<div><dt id="stat-dayavg-label">Average</dt><dd id="stat-dayavg">&mdash;</dd></div>
+					<div><dt id="stat-daytotal-label">Total</dt><dd id="stat-daytotal">&mdash;</dd></div>
+					<div><dt>Current streak</dt><dd id="stat-streak">0</dd></div>
+					<div><dt>Best streak</dt><dd id="stat-best">0</dd></div>
+					<div><dt>Overall average</dt><dd id="stat-avg">&mdash;</dd></div>
+					<div><dt>Overall total</dt><dd id="stat-total">&mdash;</dd></div>
+					<div><dt>Days logged</dt><dd id="stat-days">0</dd></div>
+					<div><dt>Stars earned</dt><dd id="stat-stars">0</dd></div>
+				</dl>
 			</div>
 		</section>
 
@@ -89,10 +116,10 @@
 				<div class="history-grid">
 					<div>
 						<h2 class="tool__title" id="history-title">History</h2>
-						<p class="empty" id="history-empty">No results yet. Paste one above to start a streak.</p>
+						<p class="empty" id="history-empty">No results yet. Add a game above to start.</p>
 						<table class="history" id="history-table" hidden>
 							<caption class="visually-hidden">Your most recent days, newest first</caption>
-							<thead><tr><th scope="col">Day</th><th scope="col">Games</th><th scope="col">Score</th><th scope="col"><span class="visually-hidden">Remove</span></th></tr></thead>
+							<thead><tr><th scope="col">Day</th><th scope="col">Games</th><th scope="col">Average</th><th scope="col">Total</th><th scope="col"><span class="visually-hidden">Remove</span></th></tr></thead>
 							<tbody id="history-body"></tbody>
 						</table>
 					</div>
@@ -131,9 +158,9 @@
 
 				<details class="rules">
 					<summary>How scoring works</summary>
+					<p>Each result becomes a base score from 0 to 100, using the rules below. A <span class="star">&#9733;</span> result is an exceptional one: it counts double in the day&rsquo;s Average and adds 10 points to the day&rsquo;s Total. The Average is the weighted mean of the day&rsquo;s scores, and the Total adds them up. Your overall Average is the mean of your daily Averages, and your overall Total is the sum of your daily Totals. Clues by Sam is link-only and isn&rsquo;t scored.</p>
 					<dl id="rules"></dl>
-					<p>Each result becomes a score from 0 to 100. A day&rsquo;s score is the average of the games scored that day, and the average above is the mean of your daily scores. A streak counts every day with at least one game logged, and today doesn&rsquo;t break it until the day is over. If a result prints its own date, like Contexto, it is filed under that date instead of the one you picked.</p>
-					<p>Your results are saved only in this browser. Use Export and Import to move them to another device.</p>
+					<p>This is version one of the scoring, and I&rsquo;ll keep tuning it. Only your pasted results are saved, so your history re-scores automatically when the rules change. They live in this browser only; use Export and Import to move them to another device.</p>
 				</details>
 			</div>
 		</section>

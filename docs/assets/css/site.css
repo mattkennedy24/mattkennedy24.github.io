@@ -884,6 +884,54 @@ html:not(.js) .carousel__ui, html:not(.js) .viewer__bar, html:not(.js) [data-dem
 .stats dt { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-2); }
 .stats dd { margin: 0.2rem 0 0; font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.25rem); font-weight: 700; line-height: 1; color: var(--text); }
 
+.stats--wide { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 1.5rem; }
+.stats--card { grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 1.25rem 0 0.75rem; }
+.stats--card dd { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+.sec--tight { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+
+/* The game picker, today's card, and star marks */
+.pfield__row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; }
+.pfield select {
+	flex: 1 1 14rem;
+	max-width: 22rem;
+	padding: 0.8rem 2.5rem 0.8rem 1rem;
+	background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23191713' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 1rem center;
+	border: 1px solid var(--text);
+	border-radius: 0;
+	color: var(--text);
+	font: inherit;
+	-webkit-appearance: none;
+	appearance: none;
+}
+.play-link { font-weight: 600; white-space: nowrap; }
+
+.card__title { margin-bottom: 1rem; padding-top: 0.75rem; border-top: 4px solid var(--text); font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; }
+.cardlist { display: grid; gap: 0.5rem; }
+.cardlist li {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.25rem 1rem;
+	padding: 0.6rem 0.85rem;
+	background: #fff;
+	border: 1px solid var(--text);
+	font-size: 0.95rem;
+}
+.cardlist__right { display: inline-flex; align-items: center; gap: 0.9rem; }
+.sec--paper .link-btn { color: var(--text-2); }
+.sec--paper .link-btn:hover { color: var(--text); }
+
+.star {
+	display: inline-block;
+	margin-left: 0.4rem;
+	padding: 0 0.35rem;
+	background: var(--hl);
+	color: var(--text);
+	font-size: 0.8em;
+	line-height: 1.5;
+}
+
 .history-grid { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: clamp(2rem, 6vw, 4rem); align-items: start; }
 .history { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
 .history th {
@@ -942,10 +990,10 @@ html:not(.js) .carousel__ui, html:not(.js) .viewer__bar, html:not(.js) [data-dem
 
 @media (max-width: 900px) {
 	.tool, .history-grid { grid-template-columns: 1fr; }
+	.stats--wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 560px) {
-	.history th:nth-child(4), .history td:nth-child(4) { text-align: right; }
 	.history thead { display: none; }
 	.history, .history tbody, .history tr, .history td { display: block; width: 100%; }
 	.history tr { padding: 0.9rem 0; border-bottom: 1px solid var(--rule-dark); }
