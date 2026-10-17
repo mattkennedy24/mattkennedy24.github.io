@@ -1,81 +1,93 @@
-<!DOCTYPE HTML>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Internship</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript>
-        <link rel="stylesheet" href="assets/css/noscript.css" />
-    </noscript>
-    <style>
-        .video-container {
-            flex: 1;
-            align-self: center;
-        }
-    </style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Pariveda Solutions internship — Matt Kennedy</title>
+	<meta name="description" content="What I built as a full-stack technical consultant intern at Pariveda Solutions: a bird-song validation pipeline for the Urban Wildlife Information Network.">
+	<meta name="theme-color" content="#101713">
+	<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+	<link rel="canonical" href="https://mattkennedy24.github.io/internship.html">
+	<meta property="og:url" content="https://mattkennedy24.github.io/internship.html">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="og:title" content="Pariveda Solutions internship — Matt Kennedy">
+	<meta property="og:description" content="What I built as a full-stack technical consultant intern at Pariveda Solutions: a bird-song validation pipeline for the Urban Wildlife Information Network.">
+	<meta property="og:image" content="https://mattkennedy24.github.io/images/og-card.jpg">
+	<script>document.documentElement.className += ' js';</script>
+	<link rel="stylesheet" href="assets/css/site.css">
 </head>
+<body>
+	<a class="skip-link" href="#main">Skip to content</a>
+	<header class="site-header">
+		<div class="wrap">
+			<a class="wordmark" href="index.html" aria-label="Matt Kennedy, home">Matt Kennedy</a>
+			<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+			<nav class="site-nav" id="site-nav" aria-label="Primary">
+				<ul class="nav-list">
+					<li><a href="index.html#foundation">Foundation</a></li>
+					<li><a href="index.html#craft">Craft</a></li>
+					<li><a href="index.html#askgm">Ask GM</a></li>
+					<li><a href="index.html#builds">Builds</a></li>
+					<li><a href="index.html#off">Off the clock</a></li>
+					<li><a href="travel.html">Travel</a></li>
+					<li><a href="games.html">Games</a></li>
+					<li><a href="index.html#contact">Say hello</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
 
-<body class="is-preload">
+	<main id="main" tabindex="-1">
+		<section class="page-hero">
+			<div class="wrap">
+				<div class="hero__rule"><p class="eyebrow" style="margin:0">02 &mdash; Craft &middot; Pariveda Solutions</p></div>
+				<h1>What I built at Pariveda.</h1>
+				<p class="hero__dek">Technical Consultant Intern (Full Stack) &middot; Chicago, IL &middot; May &ndash; Aug 2023</p>
+			</div>
+		</section>
 
-    <!-- Header -->
-    <header id="header">
-        <a href="index.html" class="title">Work Experience</a>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="generic.html" class="active">Job Summary</a></li>
-            </ul>
-        </nav>
-    </header>
+		<section class="sec sec--paper" aria-label="Internship story">
+			<div class="wrap">
+				<div class="article">
+					<div class="prose">
+						<p>As a technical consultant, my primary responsibility involved full-stack web development for the Urban Wildlife Information Network (UWIN) research website. To provide context, when we embarked on this project, UWIN had an outdated web app that allowed users to upload and identify animal photos from camera traps. To modernize and enhance the platform, we initiated a series of significant changes. We restructured the database to support audio data alongside images, upgraded the app from Angular v4 to v16, and integrated a state-of-the-art acoustic data processing pipeline.</p>
+						<p>These modifications opened the door for over 1000 global users to upload audio files collected from Audio Recording Units (ARUs). The pipeline efficiently divides 30+ minute recordings into 3-second segments, distinguishing bird songs from urban noise, and employing an advanced ML model to identify the detected species. It provides users with information on the detected bird species, including a percentage of confidence and an audio spectrogram image, all of which is stored in MySQL or Google Cloud Platform (GCP).</p>
+						<p>One of my key contributions was the development of the new recordings validations page from the ground up. This page is where all the output from our pipeline is delivered from the server to the client. Building this page posed a variety of intricate technical challenges. It displays all 3-second clips that received a bird identification from the ML model, and these results are sorted by confidence level. Integrating audio files, spectrograms, recordings, and species data from GCP buckets and MySQL necessitated the development of efficient API calls, Cloud Functions, and data structures for data management. Researchers can now validate detections by listening to these 3-second clips and confirming the presence of specific bird species. The absence of similar services has firmly established our client as a leader in animal identification research.</p>
+						<p>Our work involved evolving the database architecture, implementing GCP cloud functions for table interactions, and establishing a streamlined workflow for audio and spectrogram integration. Regular communication with the client ensured alignment, and we utilized Jira for project management, maintaining velocity and adapting based on sprint insights. I managed feature branches across both the APP and API repositories, deploying to a development site mirroring production for thorough testing before deployment to the production environment.</p>
+						<p>Our application now serves over 50 global partners across 100+ locations, boasting a user base of over 1000 users. With the added capabilities for audio file management and bird identification, we have positioned our client for success in attracting new partners and users from around the world.</p>
+						<div class="demo">
+							<button class="btn" type="button" data-demo="EkCIK61cBtM">Watch a demo of the validations page</button>
+							<noscript><a class="btn" href="https://www.youtube.com/watch?v=EkCIK61cBtM" rel="noopener">Watch a demo of the validations page on YouTube</a></noscript>
+							<div class="demo__frame" id="demo-frame" hidden></div>
+						</div>
+						<div class="actions-row">
+							<a class="btn btn--ghost" href="performance_review.html">Read my performance review</a>
+							<a class="btn btn--ghost" href="index.html#craft">&larr; Back to the story</a>
+						</div>
+					</div>
 
-    <!-- Wrapper -->
-    <div id="wrapper">
+					<div class="article__side">
+						<figure class="article__figure">
+							<img src="images/uwin-presentation.jpg" width="1400" height="1050" alt="Matt Kennedy at a podium presenting the recording validation page of the UWIN research site on a large screen">
+							<figcaption>Presenting the validation page to the client.</figcaption>
+						</figure>
+						<figure class="article__figure">
+							<img src="images/pariveda-zoo-team.jpg" width="1050" height="1400" loading="lazy" alt="Seven people standing in front of the Lincoln Park Zoo entrance sign">
+							<figcaption>The project team at the Lincoln Park Zoo.</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 
-        <!-- Main -->
-        <section id="main" class="wrapper">
-            <div class="inner">
-                <h1 class="major">My Accomplishments at Pariveda</h1>
-                <span class="image fit"><img src="images/IMG-5960.JPG" alt="" /></span>
-                <p>As a technical consultant, my primary responsibility involved full-stack web development for the Urban Wildlife Information Network (UWIN) research website. To provide context, when we embarked on this project, UWIN had an outdated web app that allowed users to upload and identify animal photos from camera traps. To modernize and enhance the platform, we initiated a series of significant changes. We restructured the database to support audio data alongside images, upgraded the app from Angular v4 to v16, and integrated a state-of-the-art acoustic data processing pipeline.</p>
-                <p>These modifications opened the door for over 1000 global users to upload audio files collected from Audio Recording Units (ARUs). The pipeline efficiently divides 30+ minute recordings into 3-second segments, distinguishing bird songs from urban noise, and employing an advanced ML model to identify the detected species. It provides users with information on the detected bird species, including a percentage of confidence and an audio spectrogram image, all of which is stored in MySQL or Google Cloud Platform (GCP)</p>
-                <p>One of my key contributions was the development of the new recordings validations page from the ground up. This page is where all the output from our pipeline is delivered from the server to the client. Building this page posed a variety of intricate technical challenges. It displays all 3-second clips that received a bird identification from the ML model, and these results are sorted by confidence level. Integrating audio files, spectrograms, recordings, and species data from GCP buckets and MySQL necessitated the development of efficient API calls, Cloud Functions, and data structures for data management. Researchers can now validate detections by listening to these 3-second clips and confirming the presence of specific bird species. The absence of similar services has firmly established our client as a leader in animal identification research.</p>
-                <p>Our work involved evolving the database architecture, implementing GCP cloud functions for table interactions, and establishing a streamlined workflow for audio and spectrogram integration. Regular communication with the client ensured alignment, and we utilized Jira for project management, maintaining velocity and adapting based on sprint insights.
-                    I managed feature branches across both the APP and API repositories, deploying to a development site mirroring production for thorough testing before deployment to the production environment.</p>
-                <p>Our application now serves over 50 global partners across 100+ locations, boasting a user base of over 1000 users. With the added capabilities for audio file management and bird identification, we have positioned our client for success in attracting new partners and users from around the world</p>
-                <div>
-                    <!-- YouTube Video Embed -->
-                    <button id="playButton">Watch a demo of the validations page</button>
-                    <div id="videoContainer" style="display: none;">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/EkCIK61cBtM" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <a href="performance_review.html" class="button">Read my performance review</a>
-                </div>
-        </section>
-    </div>
+	<footer class="site-footer">
+		<div class="wrap">
+			<p>&copy; 2026 Matt Kennedy &middot; St. Louis, MO</p>
+			<p>Designed and built by hand. <a href="index.html">Back to the story</a></p>
+		</div>
+	</footer>
 
-
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script>
-        // JavaScript to show/hide the video
-        const playButton = document.getElementById("playButton");
-        const videoContainer = document.getElementById("videoContainer");
-    
-        playButton.addEventListener("click", function () {
-            playButton.style.display = "none";
-            videoContainer.style.display = "block";
-        });
-        </script>
-    </body>
-
+	<script src="assets/js/site.js" defer></script>
+</body>
 </html>
