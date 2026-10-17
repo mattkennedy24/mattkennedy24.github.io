@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Daily games — Matt Kennedy</title>
+	<meta name="description" content="The daily puzzles I play, and a scorecard that tracks your streak and average on your own device.">
+	<meta name="theme-color" content="#101713">
+	<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+	<link rel="canonical" href="https://mattkennedy24.github.io/games.html">
+	<meta property="og:url" content="https://mattkennedy24.github.io/games.html">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="og:title" content="Daily games — Matt Kennedy">
+	<meta property="og:description" content="The daily puzzles I play, and a scorecard that tracks your streak and average on your own device.">
+	<meta property="og:image" content="https://mattkennedy24.github.io/images/og-card.jpg">
+	<script>document.documentElement.className += ' js';</script>
+	<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+	<a class="skip-link" href="#main">Skip to content</a>
+	<header class="site-header">
+		<div class="wrap">
+			<a class="wordmark" href="index.html" aria-label="Matt Kennedy, home">Matt Kennedy</a>
+			<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+			<nav class="site-nav" id="site-nav" aria-label="Primary">
+				<ul class="nav-list">
+					<li><a href="index.html#foundation">Foundation</a></li>
+					<li><a href="index.html#craft">Craft</a></li>
+					<li><a href="index.html#askgm">Ask GM</a></li>
+					<li><a href="index.html#builds">Builds</a></li>
+					<li><a href="index.html#off">Off the clock</a></li>
+					<li><a href="travel.html">Travel</a></li>
+					<li><a href="games.html" aria-current="page">Games</a></li>
+					<li><a href="index.html#contact">Say hello</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main" tabindex="-1">
+		<section class="page-hero">
+			<div class="wrap">
+				<div class="hero__rule"><p class="eyebrow" style="margin:0">05 &mdash; Off the clock</p></div>
+				<h1>Daily games.</h1>
+				<p class="hero__dek">The puzzles I play every day, and a scorecard that keeps your streak. It all stays in your browser.</p>
+			</div>
+		</section>
+
+		<section class="sec sec--paper" aria-labelledby="log-title">
+			<div class="wrap">
+				<div class="tool">
+					<div>
+						<h2 class="tool__title" id="log-title">Log your results</h2>
+						<p class="tool__lede">Play, tap Share in the game, and paste the text here. Paste several at once if you like.</p>
+						<noscript><p class="hint">The scorecard needs JavaScript to read and save your results.</p></noscript>
+						<form id="log-form" novalidate>
+							<div class="pfield">
+								<label for="paste">Paste your results</label>
+								<textarea id="paste" spellcheck="false" autocomplete="off" placeholder="Wordle 1,946 5/6&#10;&#10;&#11035;&#11035;&#11035;&#11035;&#129001;&#10;..."></textarea>
+							</div>
+							<div class="pfield">
+								<label for="day">Results are from</label>
+								<input type="date" id="day">
+							</div>
+							<div class="tool__actions">
+								<button class="btn" type="submit">Add to scorecard</button>
+							</div>
+							<p class="tool__status" id="log-status" role="status" aria-live="polite"></p>
+							<ul class="parsed" id="parsed" aria-label="What was read from your paste"></ul>
+						</form>
+					</div>
+
+					<div>
+						<dl class="stats" aria-label="Your scorecard">
+							<div><dt>Current streak</dt><dd id="stat-streak">0</dd></div>
+							<div><dt>Best streak</dt><dd id="stat-best">0</dd></div>
+							<div><dt>Days logged</dt><dd id="stat-days">0</dd></div>
+							<div><dt>Games logged</dt><dd id="stat-games">0</dd></div>
+							<div><dt>Average score</dt><dd id="stat-avg">&mdash;</dd></div>
+							<div><dt id="stat-day-label">Score</dt><dd id="stat-day">&mdash;</dd></div>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="sec sec--forest" aria-labelledby="history-title">
+			<div class="wrap">
+				<div class="history-grid">
+					<div>
+						<h2 class="tool__title" id="history-title">History</h2>
+						<p class="empty" id="history-empty">No results yet. Paste one above to start a streak.</p>
+						<table class="history" id="history-table" hidden>
+							<caption class="visually-hidden">Your most recent days, newest first</caption>
+							<thead><tr><th scope="col">Day</th><th scope="col">Games</th><th scope="col">Score</th><th scope="col"><span class="visually-hidden">Remove</span></th></tr></thead>
+							<tbody id="history-body"></tbody>
+						</table>
+					</div>
+					<div>
+						<h2 class="avgs-title">By game</h2>
+						<ul class="avgs" id="averages"></ul>
+					</div>
+				</div>
+
+				<div class="toolbar">
+					<button class="btn" type="button" id="btn-copy">Copy summary</button>
+					<button class="btn btn--ghost" type="button" id="btn-export">Export</button>
+					<button class="btn btn--ghost" type="button" id="btn-import">Import</button>
+					<button class="btn btn--ghost" type="button" id="btn-reset">Reset</button>
+					<input type="file" id="import-file" accept="application/json,.json" hidden>
+					<p class="toolbar__status" id="tool-status" role="status" aria-live="polite"></p>
+				</div>
+			</div>
+		</section>
+
+		<section class="sec sec--paper" aria-labelledby="games-title">
+			<div class="wrap">
+				<h2 class="tool__title" id="games-title">The games</h2>
+				<p class="tool__lede">What I play most days. Tap one to try today&rsquo;s puzzle.</p>
+				<ul class="gamelist">
+						<li><a href="https://www.nytimes.com/games/wordle" target="_blank" rel="noopener"><span class="gamelist__name">Wordle<span class="gamelist__tag">Scorecard</span></span><span class="gamelist__meta">nytimes.com/games/wordle &nearr;</span></a></li>
+						<li><a href="https://www.nytimes.com/games/connections" target="_blank" rel="noopener"><span class="gamelist__name">Connections<span class="gamelist__tag">Scorecard</span></span><span class="gamelist__meta">nytimes.com/games/connections &nearr;</span></a></li>
+						<li><a href="https://contexto.me" target="_blank" rel="noopener"><span class="gamelist__name">Contexto</span><span class="gamelist__meta">contexto.me &nearr;</span></a></li>
+						<li><a href="https://timeguessr.com" target="_blank" rel="noopener"><span class="gamelist__name">TimeGuessr<span class="gamelist__tag">Scorecard</span></span><span class="gamelist__meta">timeguessr.com &nearr;</span></a></li>
+						<li><a href="https://krillion.io" target="_blank" rel="noopener"><span class="gamelist__name">Krillion<span class="gamelist__tag">Scorecard</span></span><span class="gamelist__meta">krillion.io &nearr;</span></a></li>
+						<li><a href="https://fermi.gg" target="_blank" rel="noopener"><span class="gamelist__name">Fermi</span><span class="gamelist__meta">fermi.gg &nearr;</span></a></li>
+						<li><a href="https://topfivetrivia.com" target="_blank" rel="noopener"><span class="gamelist__name">Top 5 Trivia<span class="gamelist__tag">Scorecard</span></span><span class="gamelist__meta">topfivetrivia.com &nearr;</span></a></li>
+						<li><a href="https://cluesbysam.com" target="_blank" rel="noopener"><span class="gamelist__name">Clues by Sam</span><span class="gamelist__meta">cluesbysam.com &nearr;</span></a></li>
+				</ul>
+
+				<details class="rules">
+					<summary>How scoring works</summary>
+					<dl id="rules"></dl>
+					<p>Each result becomes a score from 0 to 100. A day&rsquo;s score is the average of the games scored that day, and the average above is the mean of your daily scores. A streak counts every day with at least one game logged, and today doesn&rsquo;t break it until the day is over.</p>
+					<p>Your results are saved only in this browser. Use Export and Import to move them to another device.</p>
+				</details>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="wrap">
+			<p>&copy; 2026 Matt Kennedy &middot; St. Louis, MO</p>
+			<p>Designed and built by hand. <a href="index.html">Back to the story</a></p>
+		</div>
+	</footer>
+
+	<script src="assets/js/trivia-parser.js" defer></script>
+	<script src="assets/js/games.js" defer></script>
+	<script src="assets/js/site.js" defer></script>
+</body>
+</html>
