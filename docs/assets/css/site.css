@@ -1276,3 +1276,20 @@ html:not(.js) .carousel__ui, html:not(.js) .viewer__bar, html:not(.js) [data-dem
 @media (max-width: 900px) {
 	.piece { grid-template-columns: 1fr; }
 }
+
+.pieces { margin-top: clamp(2.5rem, 6vw, 4rem); border-top: 1px solid var(--rule-dark); }
+.pieces li { border-bottom: 1px solid var(--rule-dark); }
+.pieces a {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 0.2rem 1.5rem;
+	padding: 1.4rem 0;
+	text-decoration: none;
+}
+.pieces__meta, .pieces__title, .pieces__desc { grid-column: 1; }
+.pieces__meta { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--hl); }
+.pieces__title { font-family: var(--serif); font-size: clamp(1.6rem, 3.6vw, 2.25rem); font-weight: 700; line-height: 1.1; }
+.pieces__desc { color: var(--on-dark-2); }
+.pieces__go { grid-column: 2; grid-row: 1 / span 3; align-self: center; font-size: 1.75rem; color: var(--hl); transition: transform 0.2s; }
+.pieces a:hover .pieces__title { text-decoration: underline; text-decoration-color: var(--hl); text-decoration-thickness: 0.08em; }
+.pieces a:hover .pieces__go { transform: translate(0.15rem, -0.15rem); }
