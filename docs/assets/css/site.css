@@ -13,7 +13,7 @@
 	 7. Foundation       15. Travel carousel
 	 8. Craft            16. Motion + responsive
                      17. Games page
-                     18. AI guide
+                     18. Writing + AI guide
 
 /* 1. Tokens ------------------------------------------------------------- */
 
@@ -975,7 +975,7 @@ html:not(.js) .carousel__ui, html:not(.js) .viewer__bar, html:not(.js) [data-dem
 	.sec *, .hero *, .page-hero *, .site-footer * { color: #000 !important; }
 }
 
-/* 18. AI guide ------------------------------------------------------------ */
+/* 18. Writing + AI guide --------------------------------------------------- */
 /* A long-form reading page. Callouts are told apart by a left rule and a mark,
    not by a tinted box alone, so they survive print and forced colours. */
 
@@ -1236,4 +1236,43 @@ html:not(.js) .carousel__ui, html:not(.js) .viewer__bar, html:not(.js) [data-dem
 	.guide__toc, .gd-copy { display: none !important; }
 	.gd-takeaway { border: 2px solid #000; }
 	.gd-verdict, .gd-prompt, .gd-note, .gd-stop, .gd-warn, .gd-goal, .gd-takeaway, .gd-steps li { break-inside: avoid; }
+}
+
+/* Writing (home page) */
+.piece {
+	display: grid;
+	grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+	gap: clamp(2rem, 6vw, 5rem);
+	align-items: start;
+	padding-top: clamp(2rem, 5vw, 3rem);
+	border-top: 1px solid var(--rule-dark);
+}
+.piece__meta {
+	margin: 0 0 0.9rem;
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--hl);
+}
+.piece__title { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; }
+.piece__title a { text-decoration: none; }
+.piece__title a:hover { text-decoration: underline; text-decoration-color: var(--hl); }
+.piece__dek { max-width: 36rem; margin: 1.1rem 0; font-family: var(--serif); font-size: clamp(1.2rem, 2.3vw, 1.45rem); line-height: 1.45; }
+.piece__main > p:not([class]) { max-width: 36rem; color: var(--on-dark-2); }
+.piece .btn { margin-top: 0.5rem; }
+.piece__side-title {
+	margin: 0 0 0.75rem;
+	padding-top: 0.75rem;
+	border-top: 4px solid currentColor;
+	font-size: 0.78rem;
+	font-weight: 600;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+}
+.piece__toc li { display: grid; grid-template-columns: 2.25rem 1fr; padding: 0.6rem 0; border-bottom: 1px solid var(--rule-dark); color: var(--on-dark-2); }
+.piece__toc b { font-family: var(--serif); font-style: italic; color: var(--on-dark); }
+
+@media (max-width: 900px) {
+	.piece { grid-template-columns: 1fr; }
 }
