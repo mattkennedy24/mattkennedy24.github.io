@@ -238,6 +238,24 @@
 		render();
 	}
 
+	/* AI guide: copy a prompt to the clipboard ------------------------------ */
+	var copyStatus = qs('#copy-status');
+	qsa('[data-copy]').forEach(function (btn) {
+		btn.addEventListener('click', function () {
+			var text = qs('#' + btn.getAttribute('data-copy')).textContent;
+			var done = function (ok) {
+				btn.textContent = ok ? 'Copied' : 'Select and copy';
+				if (copyStatus) { copyStatus.textContent = ok ? 'Prompt copied to the clipboard.' : 'Copying failed; select the text to copy it.'; }
+				window.setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+			};
+			if (navigator.clipboard && window.isSecureContext) {
+				navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+			} else {
+				done(false);
+			}
+		});
+	});
+
 	/* Internship: load the YouTube demo only when asked (faster, more private) */
 	var demoBtn = qs('[data-demo]');
 	if (demoBtn) {

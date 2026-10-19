@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Working Well with AI — Matt Kennedy</title>
+	<meta name="description" content="A plain-language guide to using AI tools well: how they build answers, when to trust them, and how to write prompts that get reliable results.">
+	<meta name="theme-color" content="#101713">
+	<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+	<link rel="canonical" href="https://mattkennedy24.github.io/ai-guide.html">
+	<meta property="og:url" content="https://mattkennedy24.github.io/ai-guide.html">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="og:title" content="Working Well with AI — Matt Kennedy">
+	<meta property="og:description" content="A plain-language guide to using AI tools well: how they build answers, when to trust them, and how to write prompts that get reliable results.">
+	<meta property="og:image" content="https://mattkennedy24.github.io/images/og-card.jpg">
+	<script>document.documentElement.className += ' js';</script>
+	<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+	<a class="skip-link" href="#main">Skip to content</a>
+	<header class="site-header">
+		<div class="wrap">
+			<a class="wordmark" href="index.html" aria-label="Matt Kennedy, home">Matt Kennedy</a>
+			<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+			<nav class="site-nav" id="site-nav" aria-label="Primary">
+				<ul class="nav-list">
+					<li><a href="index.html#foundation">Foundation</a></li>
+					<li><a href="index.html#craft">Craft</a></li>
+					<li><a href="index.html#askgm">Ask GM</a></li>
+					<li><a href="index.html#builds">Builds</a></li>
+					<li><a href="index.html#writing">Writing</a></li>
+					<li><a href="index.html#off">Off the clock</a></li>
+					<li><a href="travel.html">Travel</a></li>
+					<li><a href="games.html">Games</a></li>
+					<li><a href="index.html#contact">Say hello</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main" tabindex="-1">
+		<section class="page-hero">
+			<div class="wrap">
+				<div class="hero__rule"><p class="eyebrow" style="margin:0">A field guide &middot; 2026</p></div>
+				<h1>Working well with <em>AI.</em></h1>
+				<p class="hero__dek">The fundamentals that hold true across each AI tool: how to think about them, when to reach for them, and how to get reliable results.</p>
+				<p class="guide-byline">By Matt Kennedy &middot; About a 15-minute read</p>
+			</div>
+		</section>
+
+		<section class="sec sec--paper" aria-label="The guide">
+			<div class="wrap">
+				<div class="guide">
+					<nav class="guide__toc" aria-label="In this guide">
+						<p class="guide__toc-title">In this guide</p>
+						<ol>
+							<li><a href="#understanding">01 Understanding AI</a></li>
+							<li><a href="#when">02 When to Use AI</a></li>
+							<li><a href="#prompting">03 Prompting</a></li>
+							<li><a href="#reference">Quick Reference</a></li>
+							<li><a href="#reading">Further Reading</a></li>
+						</ol>
+					</nav>
+
+					<article class="guide__body">
+
+						<!-- Contents -->
+						<section class="guide__contents" aria-labelledby="contents-title">
+							<h2 class="guide__label" id="contents-title">Contents</h2>
+							<p class="guide__lede">This guide builds skill-by-skill. Each section assumes the one before it, so reading front-to-back is the fastest path to everything clicking.</p>
+							<ol class="guide__index">
+								<li><a href="#understanding"><span class="gi-num">01</span><span><span class="gi-title">Understanding AI</span><span class="gi-desc">How AI builds answers, and the three principles that shape reliability</span></span></a></li>
+								<li><a href="#when"><span class="gi-num">02</span><span><span class="gi-title">When to Use AI</span><span class="gi-desc">Judging when a task fits AI, and how far to trust what it returns</span></span></a></li>
+								<li>
+									<a href="#prompting"><span class="gi-num">03</span><span><span class="gi-title">Prompting</span><span class="gi-desc">Writing clear requests, sizing effort, trustworthy answers, and steering output</span></span></a>
+									<ul class="gi-subs">
+										<li><a href="#anatomy"><b>3.1</b> Anatomy of a Good Prompt</a></li>
+										<li><a href="#effort"><b>3.2</b> Match the Effort to the Task</a></li>
+										<li><a href="#bigger"><b>3.3</b> For Bigger Tasks: Explore, Plan, Implement, Review</a></li>
+										<li><a href="#trust"><b>3.4</b> Getting Trustworthy Answers</a></li>
+										<li><a href="#steering"><b>3.5</b> Steering &amp; Reviewing Output</a></li>
+									</ul>
+								</li>
+								<li><a href="#reference"><span class="gi-num">&mdash;</span><span><span class="gi-title">Quick Reference</span><span class="gi-desc">A principle check, reminders, and copy-ready prompts</span></span></a></li>
+								<li><a href="#reading"><span class="gi-num">&mdash;</span><span><span class="gi-title">Further Reading &amp; Citations</span><span class="gi-desc">Reputable resources and the sources cited in this guide</span></span></a></li>
+							</ol>
+						</section>
+
+						<!-- 01 · Understanding AI -->
+						<section class="guide__sec" id="understanding" aria-labelledby="h-understanding">
+							<div class="chapter">
+								<p class="chapter__no"><b>01</b>Section</p>
+								<h2 class="guide__h" id="h-understanding">Understanding AI</h2>
+							</div>
+							<p class="guide__lede">AI tools are built on Large Language Models (LLMs), systems trained on enormous amounts of written text. When you ask a question, the model does not look up a stored answer. It draws from what it learned during training and, in some cases, from live web search, then uses all of that plus your prompt to build a response.</p>
+
+							<p>You do not need to understand the technology to use it well, but understanding how your input becomes a response is what separates a good result from a frustrating one. One idea sits underneath everything else: <mark class="gd-key">what you put in shapes what comes out.</mark> AI only works with what you give it. A vague request gets a vague answer; a clear goal with the right context and concrete constraints gets a far better one.</p>
+							<div class="gd-note"><strong>Think of it this way:</strong> Telling someone to "head south" to reach your house is unlikely to work out well. Precise turn-by-turn directions give them a much better shot. Your prompts work the same way.</div>
+
+							<h3>Three Principles Behind AI</h3>
+							<p>Beyond that foundation, three properties shape every answer AI gives: steerability, knowledge, and working memory. The terms sound technical, but the lesson is simple. AI has predictable strengths and predictable limits, and learning these three lets you answer the two questions that matter every time you reach for it: <strong>is this task a good fit, and how far should I trust what comes back?</strong></p>
+
+							<h4>Steerability <span class="gd-tag">how well AI follows your lead</span></h4>
+							<p>AI is built to be helpful, so it follows the direction of your prompt rather than challenging it. Your instructions, examples, tone, and framing all steer the result, which is exactly what makes prompting powerful. The flip side: if your question is leading or rests on a flawed premise, it tends to follow that framing instead of pushing back.</p>
+							<div class="gd-note"><strong>So:</strong> Ask balanced questions. Instead of "Why is this a bad idea?", ask "What are the benefits, risks, assumptions, and tradeoffs?" and you will get a more honest answer.</div>
+
+							<h4>Knowledge <span class="gd-tag">what AI actually knows</span></h4>
+							<p>AI builds answers by prediction, completing your prompt from patterns it learned in training, like a far more capable autocomplete. It has absorbed more material than any person could, which makes it fluent and often accurate. But a fluent answer is not a verified one. Its knowledge has gaps and a cutoff date, and when something is missing it may fill the gap with text that simply sounds true.</p>
+							<div class="gd-note"><strong>So:</strong> A confident response is not a verified one. For facts specific to your work or organization, or anything current, give it the context or have it use sources you can check. Do not assume it already knows.</div>
+
+							<h4>Working Memory <span class="gd-tag">what it can hold at once</span></h4>
+							<p>AI has a fixed memory limit, like a whiteboard, called the context window. It holds your prompts, its replies, and anything you have shared, and it sets what the model can pay attention to. While the important material fits, it tracks everything well. As the board fills, earlier details lose influence or get pushed off entirely.</p>
+							<div class="gd-note"><strong>So:</strong> Put the most important context up front and work long tasks in phases. If a chat starts to drift, repeat, or forget an instruction, start a fresh one and bring forward only what still matters.</div>
+
+							<h3>Why These Principles Matter</h3>
+							<p>AI is not uniformly reliable or uniformly risky. It is strong and weak along each of these three principles, and each one runs on a spectrum from capability to limitation. Picture any task placed on these spectrums. Where it lands answers both of your questions at once: how good a fit AI is, and how hard you should check the result.</p>
+
+							<figure class="gd-spectrum" aria-labelledby="spectrum-title">
+								<p class="gd-spectrum__title" id="spectrum-title">AI Capabilities &amp; Limitations</p>
+								<p class="gd-spectrum__sub">Place a task on each spectrum. The further left it sits, the more you can trust the result; the further right, the more it needs verification.</p>
+
+								<div class="gd-legend">
+									<div class="gd-legend__ends"><span class="cap">Capability</span><span class="lim">Limitation</span></div>
+									<div class="gd-bar" aria-hidden="true"></div>
+									<ol class="gd-legend__ticks"><li>Trust it</li><li>Spot-check</li><li>Check details</li><li>Verify carefully</li><li>High risk</li></ol>
+								</div>
+
+								<div class="gd-row">
+									<p class="gd-row__head"><span class="gd-row__name">Steerability</span> <span class="gd-row__q">How much am I in control?</span></p>
+									<div class="gd-bar" aria-hidden="true"></div>
+									<dl class="gd-row__ends">
+										<div><dt class="visually-hidden">Capability</dt><dd>Clear, checkable instructions: a format, a length, a role ("respond as a table, under 100 words")</dd></div>
+										<div class="lim"><dt class="visually-hidden">Limitation</dt><dd>Leading or flawed premises, abstract asks, long reasoning chains</dd></div>
+									</dl>
+								</div>
+
+								<div class="gd-row">
+									<p class="gd-row__head"><span class="gd-row__name">Knowledge</span> <span class="gd-row__q">What does AI actually know?</span></p>
+									<div class="gd-bar" aria-hidden="true"></div>
+									<dl class="gd-row__ends">
+										<div><dt class="visually-hidden">Capability</dt><dd>Mainstream, well-documented topics, or sources you provide for it to use</dd></div>
+										<div class="lim"><dt class="visually-hidden">Limitation</dt><dd>Niche, recent, or exact facts pulled from memory: a rate, a figure, a citable rule</dd></div>
+									</dl>
+								</div>
+
+								<div class="gd-row">
+									<p class="gd-row__head"><span class="gd-row__name">Working Memory</span> <span class="gd-row__q">What is AI paying attention to now?</span></p>
+									<div class="gd-bar" aria-hidden="true"></div>
+									<dl class="gd-row__ends">
+										<div><dt class="visually-hidden">Capability</dt><dd>Material fits, the session is current, key context is up front</dd></div>
+										<div class="lim"><dt class="visually-hidden">Limitation</dt><dd>Very long documents or chats, or expecting recall across separate sessions</dd></div>
+									</dl>
+								</div>
+							</figure>
+							<p class="gd-source">Spectrums adapted from Anthropic's <em>AI Capabilities &amp; Limitations</em> course. <a href="https://anthropic.skilljar.com/ai-capabilities-and-limitations" rel="noopener">anthropic.skilljar.com/ai-capabilities-and-limitations</a></p>
+
+							<div class="gd-note"><strong>How to use it:</strong> Before prompting, assess where your task falls on each of these spectrums. The further left your task sits, the better a fit AI is and the lighter your review can be. The further right, the more you should verify before you rely on the answer, or reconsider whether AI is the right tool at all. This helps judge when to reach for AI and how much to trust what it gives back.</div>
+						</section>
+
+						<!-- 02 · When to Use AI -->
+						<section class="guide__sec" id="when" aria-labelledby="h-when">
+							<div class="chapter">
+								<p class="chapter__no"><b>02</b>Section</p>
+								<h2 class="guide__h" id="h-when">When to Use AI</h2>
+							</div>
+							<p class="guide__lede">Section 1 covered the three principles and the spectrum they form. This section turns them into a practical habit: a quick read on any task before you hand it to AI.</p>
+
+							<div class="gd-stop">
+								<p><strong>Two hard stops, regardless of how capable AI seems:</strong></p>
+								<ul class="gd-list">
+									<li><strong>Sensitive information.</strong> Follow your company's policy before sharing client, employee, financial, or restricted data with any AI tool. When in doubt, don't.</li>
+									<li><strong>High-stakes output.</strong> When the result affects clients, compliance, money, or systems, a person reviews it and a person decides. AI can organize the issue and surface risks; it does not become the decision-maker.</li>
+								</ul>
+							</div>
+
+							<div class="gd-goal"><strong>Ownership rule:</strong> If you use AI in your work, you own the output. Before relying on anything it produces, ask yourself: can you explain it, verify it, and stand behind it?</div>
+
+							<h3>Sizing Up a Task</h3>
+							<p>Each principle has a side you can lean on and a side to watch for. Before prompting, run down the three for a quick read on where your task plays to AI's strengths and where it runs into a limit.</p>
+
+							<div class="gd-sizeup">
+								<div class="gd-su">
+									<p class="gd-su__name">Steerability</p>
+									<p><span class="gd-pill lean">Lean on</span>Clear, concrete instructions you can steer or redirect, plus examples or an assigned stance to shape the output.</p>
+									<p><span class="gd-pill watch">Watch for</span>Leading questions and flawed premises, which it will follow without pushing back.</p>
+								</div>
+								<div class="gd-su">
+									<p class="gd-su__name">Knowledge</p>
+									<p><span class="gd-pill lean">Lean on</span>Mainstream topics and common tasks like summarizing or drafting, or any source you supply.</p>
+									<p><span class="gd-pill watch">Watch for</span>Niche, recent, or exact facts pulled from memory, often stated with false confidence.</p>
+								</div>
+								<div class="gd-su">
+									<p class="gd-su__name">Working Memory</p>
+									<p><span class="gd-pill lean">Lean on</span>Focused, current sessions with the key context up front.</p>
+									<p><span class="gd-pill watch">Watch for</span>Long, sprawling chats and cross-session recall, where earlier details drop silently.</p>
+								</div>
+							</div>
+
+							<p>The more a task leans on strengths, the lighter your review. Any watch-for is a cue to verify, add context, or hand that piece to a person. The examples below put this into practice, with the principle that drives each one called out.</p>
+
+							<h4>Examples</h4>
+							<div class="gd-verdicts">
+								<div class="gd-verdict cap">
+									<p class="gd-verdict__head"><span class="vz">Capable</span> <span class="vv">Trust it</span></p>
+									<p class="gd-verdict__task">"Rewrite this internal email to be shorter and clearer."</p>
+									<p><b>Why it lands here:</b> a clear instruction (<em>Steerability</em>), a familiar writing task with no special facts (<em>Knowledge</em>), and a short, self-contained input (<em>Working Memory</em>). All three sit on the capable side.</p>
+									<p><b>So:</b> a quick read before you send is enough.</p>
+								</div>
+								<div class="gd-verdict mix">
+									<p class="gd-verdict__head"><span class="vz">Mixed</span> <span class="vv">Spot-check</span></p>
+									<p class="gd-verdict__task">"Summarize this 30-page report and list the key risks."</p>
+									<p><b>Why it lands here:</b> summarizing is a strength, but the length pushes <em>Working Memory</em> toward the middle, so details can slip.</p>
+									<p><b>So:</b> skim the source to confirm nothing important was dropped or distorted.</p>
+								</div>
+								<div class="gd-verdict lim">
+									<p class="gd-verdict__head"><span class="vz">Limitation</span> <span class="vv">Verify carefully</span></p>
+									<p class="gd-verdict__task">"Explain how this state's sales tax applies to software subscriptions, and cite the rule."</p>
+									<p><b>Why it lands here:</b> a niche topic sits far right on <em>Knowledge</em>, and asking for an exact, citable fact from memory compounds the risk.</p>
+									<p><b>So:</b> treat the facts and citations as unconfirmed until you check them against a real source.</p>
+								</div>
+							</div>
+
+							<h4>Most mistakes happen where two principles collide</h4>
+							<p>The riskiest tasks pull more than one principle to the right at once. Say you state something incorrect in your prompt and ask AI to build on it. <em>Knowledge</em> might "know" better, but <em>Steerability</em> defaults to following your framing, so the error sails straight through. When two principles are stressed together, slow down and double your verification.</p>
+
+							<div class="gd-takeaway">
+								<p class="gd-takeaway__label">Key Takeaway</p>
+								<p>Use AI as a thinking partner to move work forward, not to remove yourself from it. The three principles let you calibrate trust to the shape of the task: lean on AI where it is strong, and verify where it is not.</p>
+							</div>
+						</section>
+
+						<!-- 03 · Prompting -->
+						<section class="guide__sec" id="prompting" aria-labelledby="h-prompting">
+							<div class="chapter">
+								<p class="chapter__no"><b>03</b>Section</p>
+								<h2 class="guide__h" id="h-prompting">Prompting</h2>
+							</div>
+							<p class="guide__lede">Effective prompting is essential for using AI as a genuinely useful collaborator, and the good news is that a few practical techniques go a long way. This section covers how to write a clear request, size the effort to the task, handle larger tasks, prompt for trustworthy answers, and steer and review what comes back.</p>
+
+							<h3 id="anatomy"><span class="gd-num">3.1</span> Anatomy of a Good Prompt</h3>
+							<h4>A good request answers four questions</h4>
+							<p>You won't always need all four. But when an answer comes back wrong, one of them was usually missing.</p>
+
+							<dl class="gd-four">
+								<div><dt>Goal</dt><dd>What you want to end up with.</dd></div>
+								<div><dt>Context</dt><dd>The situation, audience, file, or data involved.</dd></div>
+								<div><dt>Constraints</dt><dd>Format, length, tone, and what to avoid.</dd></div>
+								<div><dt>Success</dt><dd>What a good answer actually includes.</dd></div>
+							</dl>
+
+							<div class="gd-examples">
+								<div class="gd-example bad">
+									<p class="gd-example__title">Weak</p>
+									<p>"Here's our product pitch. Can you review it?"</p>
+								</div>
+								<div class="gd-example good">
+									<p class="gd-example__title">Strong</p>
+									<dl class="gd-filled">
+										<div><dt>Goal:</dt><dd>Proofread this product pitch and flag any inaccuracies or overly complex wording.</dd></div>
+										<div><dt>Context:</dt><dd>It's going to an executive at a prospective client who may know little about how the product works.</dd></div>
+										<div><dt>Constraints:</dt><dd>Keep the language plain enough for a non-expert, but don't oversimplify the mechanics to the point of error.</dd></div>
+										<div><dt>Success:</dt><dd>A list of any factual errors, plus jargon or dense passages, each with a clearer suggested rewrite.</dd></div>
+									</dl>
+								</div>
+							</div>
+							<p>When possible, provide an example for the AI to model its answer on and call that out in the Context section. It is really good at matching style.</p>
+
+							<h3 id="effort"><span class="gd-num">3.2</span> Match the Effort to the Task</h3>
+							<h4>Not every task needs a full prompt</h4>
+							<p>A quick question doesn't need four parts. A client-facing document does. Sizing the prompt to the task saves time and frustration.</p>
+
+							<table class="gd-table">
+								<thead><tr><th scope="col">Level</th><th scope="col">What it looks like</th><th scope="col">Approach</th></tr></thead>
+								<tbody>
+									<tr><th scope="row">Simple</th><td data-label="Looks like">Quick question, short rewrite, informal internal draft</td><td data-label="Approach">One clear sentence. Say what you want; add tone or format if it matters.</td></tr>
+									<tr><th scope="row">Structured</th><td data-label="Looks like">Professional document, analysis, anything client-facing</td><td data-label="Approach">Use the four-part format above. Worth the extra 90 seconds.</td></tr>
+									<tr><th scope="row">Complex</th><td data-label="Looks like">Multi-step work, large documents, unclear scope, high stakes</td><td data-label="Approach">Have the AI interview you first, then work in phases (see <a href="#bigger">3.3</a>).</td></tr>
+								</tbody>
+							</table>
+
+							<div class="gd-note"><strong>Size your review the same way.</strong> The effort isn't only in the prompt: it's in checking what comes back. Use the AI Capabilities &amp; Limitations spectrum to calibrate your review effort. The further right a task sits, the harder you look before you rely on it.</div>
+
+							<div class="gd-warn"><strong>The most common mistake:</strong> using a one-liner for a complex task, then getting frustrated with the result. If the task is important or involves a document, spend the extra two minutes, or let the AI interview you first.</div>
+
+							<h4>Have the AI ask you questions</h4>
+							<p>Here is the hard part of every prompt, big or small: you hold a detailed picture of what you want in your head, and the AI only ever sees the words you actually typed. This gap inevitably leads to off-target answers.</p>
+
+							<div class="gd-takeaway">
+								<p class="gd-takeaway__label">The Interview Trick</p>
+								<p>Add this to the end of your request: <em>"Before you do anything, ask me follow-up questions until you are confident you understand my intent. Questions should uncover missing context, constraints, things to avoid, and anything that helps you do this well."</em></p>
+							</div>
+
+							<p>Why this works, in terms of the three principles:</p>
+							<ul class="gd-list">
+								<li><strong>Steerability:</strong> casting the AI as interviewer turns prompting into a two-way exchange, so it surfaces and patches gaps in its understanding before committing to an answer.</li>
+								<li><strong>Knowledge:</strong> the questions shrink the gap between your intent and what the AI is tracking. Left to guess, it tends to infer and push ahead rather than pause, because it is built to be helpful on its own.</li>
+								<li><strong>Working Memory:</strong> answering up front loads the right context into the window from the start, which means a stronger first attempt and far less off-target back-and-forth later.</li>
+							</ul>
+
+							<h3 id="bigger"><span class="gd-num">3.3</span> For Bigger Tasks</h3>
+							<h4>Plan before you build: Explore, Plan, Implement, Review</h4>
+							<p>When a task is multi-step or the scope is fuzzy, jumping too quickly to "build me this" will lead to off-target results and frustrating back-and-forth follow-up turns. Four steps to use AI efficiently with complex tasks:</p>
+
+							<ol class="gd-steps">
+								<li><span class="gd-steps__badge" aria-hidden="true">E</span><div><p class="gd-steps__title">Explore</p><p>Share the background, relevant files, and high-level goal. Let the AI orient itself with this information, break down the problem space, and surface missing details. No deliverable yet, simply let the AI explore the shape of the task.</p></div></li>
+								<li><span class="gd-steps__badge" aria-hidden="true">P</span><div><p class="gd-steps__title">Plan</p><p>After the model has explored the material and understands the goal, ask for a phased plan to accomplish the task. Read it and push back on missteps. Five minutes solidifying the plan keeps you in control and saves an hour of troubleshooting later.</p></div></li>
+								<li><span class="gd-steps__badge" aria-hidden="true">I</span><div><p class="gd-steps__title">Implement</p><p>Once you are happy with the plan, work in phases to execute it. Testing and confirming one piece at a time ensures you understand the changes. Looping back to Plan is okay if something goes wrong.</p></div></li>
+								<li><span class="gd-steps__badge" aria-hidden="true">R</span><div><p class="gd-steps__title">Review</p><p>Let the AI critique its own output, then verify it yourself thoroughly (see <a href="#steering">3.5</a>).</p></div></li>
+							</ol>
+
+							<p><strong>Working with a document?</strong> Uploading a file doesn't tell the AI what to do with it. State the goal before you attach, point to what matters ("the figures that count are in the summary tab"), and give a focused excerpt rather than everything. A large, undirected file usually produces wandering answers.</p>
+
+							<h3 id="trust"><span class="gd-num">3.4</span> Getting Trustworthy Answers</h3>
+							<p>In <a href="#when">Section 2</a> you sized up how far to trust an answer, and <a href="#understanding">Section 1</a> explained why the AI tends to follow your lead. Put those together and you can do better than trust-and-check &mdash; a few prompting habits pull a more honest, better-grounded answer out of the model in the first place.</p>
+
+							<div class="gd-note"><strong>Two quick ways to pull an answer toward the left:</strong>
+								<ul class="gd-list">
+									<li><strong>Ask it to cite its sources or say how confident it is.</strong> A claim with a source you can open &mdash; or an honest "I'm not sure" &mdash; is far easier to trust than a confident assertion with neither.</li>
+									<li><strong>For anything that must be current or exact, tell it to search the web</strong> and ground its answer in credible sources, rather than relying on what it happens to remember.</li>
+								</ul>
+							</div>
+
+							<h4>AI tends to tell you what you want to hear</h4>
+							<p>These tools are trained on feedback from people, who tend to reward answers that agree with them and sound confident. That pushes models toward matching your framing, going along with your premise, and backing down when you push, even when they were right. A 2025 study found that simply stating a belief led responses to agree with incorrect premises over 60% of the time.<sup class="gd-cite"><a href="#cite-1" aria-label="Citation 1">1</a></sup></p>
+
+							<p><strong>What this looks like:</strong> you draft a plan and ask "Is this a good approach?" The AI affirms it and offers a few polish suggestions, while a real flaw goes unmentioned, because your framing told it you'd already decided.</p>
+
+							<table class="gd-table gd-table--pairs">
+								<thead><tr><th scope="col">Instead of...</th><th scope="col">Try...</th></tr></thead>
+								<tbody>
+									<tr><td data-label="Instead of">"Is this a good approach?"</td><td data-label="Try">"What are the strongest arguments <em>against</em> this? Don't start with what's working."</td></tr>
+									<tr><td data-label="Instead of">"Does this look right?"</td><td data-label="Try">"What would make this wrong? What am I most likely missing?"</td></tr>
+									<tr><td data-label="Instead of">"What do you think?" (after sharing your view)</td><td data-label="Try">"Set aside what I just said and give me an honest assessment first."</td></tr>
+								</tbody>
+							</table>
+
+							<div class="gd-note"><strong>When you're researching or learning,</strong> one direct question lets the AI answer from memory and your framing &mdash; which is how you get a confident answer that's subtly off. Ask it to widen the lens first: <em>"Before answering, look at this from a few angles &mdash; a skeptic, an expert, someone affected &mdash; and raise the hardest questions each would ask. Then research those with current, credible sources and give me a balanced, cited summary."</em></div>
+
+							<div class="gd-takeaway">
+								<p class="gd-takeaway__label">Key Takeaway</p>
+								<p>Size the prompt to the task, plan before building anything big, and ask the AI to push back rather than agree. The honest answer is the one you have to ask for.</p>
+							</div>
+
+							<h3 id="steering"><span class="gd-num">3.5</span> Steering &amp; Reviewing Output</h3>
+							<p>The first answer is a draft. When it comes back polished and confident, it's tempting to stop, but polished is not the same as correct. Here's how to verify what you got and fix what's close but not right.</p>
+
+							<h4>Treat every output as a draft</h4>
+							<p>A tidy response with firm conclusions can contain a wrong calculation, a missing section, or a quiet assumption that changes everything. The more finished it looks, the more carefully you should read it.</p>
+
+							<div class="gd-prompt">
+								<pre id="p-review">What assumptions did you make that I should double-check?
+What would make this answer wrong?
+Was anything in my request unclear? How did you read it?
+What's missing that I didn't think to ask for?</pre>
+								<button class="gd-copy" type="button" data-copy="p-review">Copy</button>
+							</div>
+
+							<p>These four questions surface most problems before they matter. Then check facts, math, dates, and citations yourself.</p>
+
+							<h4>Steering instead of restarting</h4>
+							<p>When an answer is close, refine it rather than starting over. The AI already has the context from your conversation; throwing it away and re-typing everything is slower than correcting the specific thing that's off.</p>
+
+							<table class="gd-table gd-table--pairs">
+								<thead><tr><th scope="col">Instead of...</th><th scope="col">Try...</th></tr></thead>
+								<tbody>
+									<tr><td data-label="Instead of">"Make it better."</td><td data-label="Try">"Make it shorter, more direct, and less formal."</td></tr>
+									<tr><td data-label="Instead of">"This is wrong."</td><td data-label="Try">"The timeline is wrong, use these dates instead: [dates]."</td></tr>
+									<tr><td data-label="Instead of">"Try again."</td><td data-label="Try">"Keep the structure and examples, but change the recommendation to X."</td></tr>
+									<tr><td data-label="Instead of">"What did you mean here?"</td><td data-label="Try">"What did you assume to write that section? What did I leave out?"</td></tr>
+								</tbody>
+							</table>
+
+							<div class="gd-note"><strong>Start a fresh chat when:</strong> the conversation is very long and drifting, you've re-explained the same context three or more times, or the task has fundamentally changed from what you started with.</div>
+
+							<div class="gd-takeaway">
+								<p class="gd-takeaway__label">Key Takeaway</p>
+								<p>A polished answer isn't a correct one. Verify it, and when it's close, steer rather than restart.</p>
+							</div>
+						</section>
+
+						<!-- Quick Reference -->
+						<section class="guide__sec" id="reference" aria-labelledby="h-reference">
+							<div class="chapter">
+								<p class="chapter__no"><b>&mdash;</b>Appendix</p>
+								<h2 class="guide__h" id="h-reference">Quick Reference</h2>
+							</div>
+							<p class="guide__lede">Things to remember, and prompts you can copy straight into any AI tool.</p>
+
+							<h3>Three-principle check</h3>
+							<div class="gd-sizeup">
+								<div class="gd-su">
+									<p class="gd-su__name">Steerability <span class="gd-row__q">Am I steering it clearly?</span></p>
+									<p>Use clear goals, constraints, examples, and neutral wording.</p>
+								</div>
+								<div class="gd-su">
+									<p class="gd-su__name">Knowledge <span class="gd-row__q">Does it actually know this?</span></p>
+									<p>Provide sources for organization-specific, current, niche, or exact facts.</p>
+								</div>
+								<div class="gd-su">
+									<p class="gd-su__name">Working Memory <span class="gd-row__q">Is the right context in view?</span></p>
+									<p>Keep chats focused, put key context up front, and split large tasks into phases.</p>
+								</div>
+							</div>
+							<div class="gd-note"><strong>Use it this way:</strong> the more a task stresses one of these limits, the more you verify before relying on the answer.</div>
+
+							<h3>Core reminders</h3>
+							<ol class="gd-reminders">
+								<li>What you put in shapes what comes out. Vague questions get vague answers.</li>
+								<li>A polished, confident answer isn't a correct one. AI can state things that are wrong or out of date with complete confidence, so verify facts, numbers, and dates yourself and treat unfamiliar claims as a starting point, not a final answer.</li>
+								<li>Tell the AI what a good answer looks like. It gives the model something to aim for, not just something to fill.</li>
+								<li>For complex tasks, let the AI interview you to surface important details and constraints.</li>
+								<li>If you ask a leading question, you will likely get a leading response. Ask balanced questions.</li>
+								<li>Treat AI as a collaborator, not a replacement. The thinking is still yours.</li>
+							</ol>
+
+							<div class="gd-cards">
+								<div class="gd-card">
+									<h4>Standard prompt template</h4>
+									<div class="gd-prompt">
+										<pre id="p-template">Goal:        [what I want to end up with]
+Context:     [the situation, file, data, and audience]
+Constraints: [format, length, tone, rules, things to avoid]
+Success:     [what a good answer should include]
+
+Before you start: confirm understanding, list assumptions,
+ask one question if anything is unclear.</pre>
+										<button class="gd-copy" type="button" data-copy="p-template">Copy</button>
+									</div>
+								</div>
+								<div class="gd-card">
+									<h4>Interview mode &mdash; for complex or high-stakes tasks</h4>
+									<div class="gd-prompt">
+										<pre id="p-interview">"Before you do anything, ask me 3-5 questions that would help you do this well, including anything I should tell you to avoid. Then wait for my answers."</pre>
+										<button class="gd-copy" type="button" data-copy="p-interview">Copy</button>
+									</div>
+								</div>
+								<div class="gd-card">
+									<h4>Getting a trustworthy answer</h4>
+									<div class="gd-prompt">
+										<pre id="p-trust">"What are the strongest arguments against this? Don't start with what's working."
+
+"What would make this wrong? What am I most likely missing?"
+
+"Set aside what I just said and give me an honest assessment first."</pre>
+										<button class="gd-copy" type="button" data-copy="p-trust">Copy</button>
+									</div>
+								</div>
+								<div class="gd-card">
+									<h4>Plan before building &mdash; the EPIR starter</h4>
+									<div class="gd-prompt">
+										<pre id="p-epir">"Here's the task: [goal], with this background: [files/context]. Before building anything, explore it and tell me what matters, what's unclear, and what you need from me. Then give me a phased plan and wait for my OK before implementing. We'll go one phase at a time, and you'll review your own work before I verify it."</pre>
+										<button class="gd-copy" type="button" data-copy="p-epir">Copy</button>
+									</div>
+								</div>
+							</div>
+							<p class="visually-hidden" id="copy-status" aria-live="polite"></p>
+						</section>
+
+						<!-- Further Reading -->
+						<section class="guide__sec gd-reading" id="reading" aria-labelledby="h-reading">
+							<div class="chapter">
+								<p class="chapter__no"><b>&mdash;</b>Appendix</p>
+								<h2 class="guide__h" id="h-reading">Further Reading and Citations</h2>
+							</div>
+							<p>Learning to use AI well isn't a one-time event. It's an ongoing practice that improves with use. These tools keep evolving, and the habits that matter most develop through real work, not just reading about it. The resources below are reputable and address the areas where most people have the most room to grow.</p>
+
+							<h3>Microsoft Research: New Future of Work (ongoing series)</h3>
+							<p>The most rigorous ongoing research on how AI is actually changing knowledge work, including what's working, where the gains are uneven, and what remains hard. Worth bookmarking. <a href="https://www.microsoft.com/en-us/research/project/new-future-of-work/" rel="noopener">microsoft.com/en-us/research/project/new-future-of-work</a></p>
+
+							<h3>Gallup: What Separates AI Adopters and Holdouts (2026)</h3>
+							<p>Practical findings on the real barriers to AI adoption: less about the technology and more about skill, confidence, and whether managers model and support the behavior. <a href="https://www.gallup.com/workplace/704252" rel="noopener">gallup.com/workplace/704252</a></p>
+
+							<h3>Harvard Business Review: Why AI Augmentation May Win in the Long Run (April 2026)</h3>
+							<p>A clear case for treating AI as a collaborator rather than a replacement, and what that distinction means practically for how teams structure their work. <a href="https://hbr.org/2026/04/why-companies-that-choose-ai-augmentation" rel="noopener">hbr.org/2026/04/why-companies-that-choose-ai-augmentation</a></p>
+
+							<h3>Learn Prompting</h3>
+							<p>A free, regularly updated, vendor-neutral guide to prompting, covering everything in this document and more, with examples you can try directly. Good for self-paced learning at any skill level. <a href="https://learnprompting.org" rel="noopener">learnprompting.org</a></p>
+
+							<h3 id="cite-1"><sup class="gd-cite">1</sup> Wang et al.: "When Truth Is Overridden" (2025)</h3>
+							<p>The study behind the sycophancy statistic in Section 3. Researchers found that simply stating a belief led AI responses to agree with incorrect premises at rates averaging 63.7% across seven model families. The authors traced this to the model's internal architecture, meaning it is structural, not incidental. <a href="https://arxiv.org/abs/2508.02087" rel="noopener">arxiv.org/abs/2508.02087</a></p>
+
+							<h3>Anthropic: Research on Sycophancy (2025-2026)</h3>
+							<p>Anthropic publishes openly on the sycophancy problem and their ongoing work to address it across Claude. Useful for understanding why honest answers require deliberate prompting, and why the problem is not fully solved anywhere. <a href="https://www.anthropic.com/research" rel="noopener">anthropic.com/research</a></p>
+
+							<h3>Anthropic: AI Capabilities &amp; Limitations (course)</h3>
+							<p>The three principles in this guide are adapted from this short, plain-language course, which lays out a broader capability and limitation framework: where generative AI is reliable, where it isn't, and how to calibrate your trust accordingly. <a href="https://anthropic.skilljar.com/ai-capabilities-and-limitations" rel="noopener">anthropic.skilljar.com/ai-capabilities-and-limitations</a></p>
+
+							<h3>Wei et al.: "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models" (2022)</h3>
+							<p>The research behind "work through it step by step." Technical, but the core insight is intuitive: when you ask AI to show its reasoning, the output is more reliable and easier to verify. <a href="https://arxiv.org/abs/2201.11903" rel="noopener">arxiv.org/abs/2201.11903</a></p>
+
+							<h3>Simular: "AI Mistakes: Understanding the Errors and How to Avoid Them"</h3>
+							<p>A plain-language breakdown of the most common ways AI gets things wrong, from misinterpreting what you asked to fabricating facts and citations, and why human review stays essential. Background for the human review and ownership theme that runs throughout this guide. <a href="https://www.simular.ai/blogs/ai-mistakes-understanding-the-errors-and-how-to-avoid-them" rel="noopener">simular.ai/blogs/ai-mistakes-understanding-the-errors-and-how-to-avoid-them</a></p>
+
+							<p class="gd-end">Working Well with AI &middot; Matt Kennedy &middot; 2026</p>
+						</section>
+
+					</article>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="wrap">
+			<p>&copy; 2026 Matt Kennedy &middot; St. Louis, MO</p>
+			<p>Designed and built by hand. <a href="index.html">Back to the story</a></p>
+		</div>
+	</footer>
+
+	<script src="assets/js/site.js" defer></script>
+</body>
+</html>
