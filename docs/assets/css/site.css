@@ -431,10 +431,11 @@ mark {
 .badge img { width: 3.6rem; height: auto; }
 .company__meta { margin: 0 0 2rem; color: var(--on-dark-2); font-size: 0.95rem; }
 
-.role + .role { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--rule-dark); }
-.role__title { font-size: clamp(1.35rem, 2.6vw, 1.7rem); font-style: italic; }
+.roles { margin: 0 0 1.75rem; border-top: 1px solid var(--rule-dark); }
+.roles li { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1.5rem; padding: 0.85rem 0; border-bottom: 1px solid var(--rule-dark); }
+.role__title { font-size: clamp(1.2rem, 2.4vw, 1.5rem); font-style: italic; }
 .role__dates {
-	margin: 0.3rem 0 1.1rem;
+	margin: 0;
 	font-size: 0.72rem;
 	font-weight: 600;
 	letter-spacing: 0.2em;
@@ -442,42 +443,9 @@ mark {
 	color: var(--hl);
 }
 
-.bullets li {
-	position: relative;
-	padding-left: 1.4rem;
-	margin-bottom: 0.85rem;
-	color: var(--on-dark-2);
-}
-.bullets li::before {
-	content: "";
-	position: absolute;
-	left: 0; top: 0.7em;
-	width: 0.5rem; height: 0.5rem;
-	background: var(--hl);
-}
-.bullets strong { color: #fff; }
+.job__prose p { max-width: 38rem; font-size: 1.1rem; color: var(--on-dark); }
 
-.more-link { display: inline-block; margin-top: 1rem; font-weight: 600; }
-
-/* A small benchmark figure, built from the numbers on my resume */
-.fig { padding: 1.4rem 1.4rem 1.2rem; border: 1px solid var(--rule-dark); background: var(--ink); }
-.fig__label {
-	margin: 0 0 1.1rem;
-	font-size: 0.7rem;
-	font-weight: 600;
-	letter-spacing: 0.2em;
-	text-transform: uppercase;
-	color: var(--on-dark-2);
-}
-.bar { display: grid; grid-template-columns: 7.2rem 1fr 2.6rem; align-items: center; gap: 0.75rem; margin-bottom: 0.7rem; }
-.bar__name { font-size: 0.82rem; line-height: 1.2; color: var(--on-dark-2); }
-.bar__track { height: 1.1rem; background: rgba(238, 242, 238, 0.08); }
-.bar__fill { display: block; height: 100%; width: var(--v); background: var(--hl); transition: width 1.1s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.bar--muted .bar__fill { background: var(--on-dark-2); }
-.bar__val { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; text-align: right; }
-.fig__stats { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--rule-dark); font-size: 0.82rem; color: var(--on-dark-2); }
-.fig__stats strong { font-family: var(--serif); font-size: 1.15rem; color: var(--hl); margin-right: 0.15rem; }
-.fig figcaption { margin-top: 0.9rem; font-size: 0.8rem; font-style: italic; color: var(--on-dark-2); }
+.more-link { display: inline-block; margin-top: 0.5rem; font-weight: 600; }
 
 /* 9. Ask GM feature ----------------------------------------------------- */
 
@@ -758,7 +726,6 @@ mark {
 
 .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .js .reveal.in { opacity: 1; transform: none; }
-.js .fig:not(.in) .bar__fill { width: 0; }
 
 /* No-JS fallbacks: show every travel photo, and hide controls that need JS */
 html:not(.js) .carousel__stage { height: auto; display: grid; gap: 1rem; background: none; overflow: visible; }
@@ -801,7 +768,6 @@ html:not(.js) .carousel__ui, html:not(.js) .viewer__bar, html:not(.js) [data-dem
 	.inside ol { grid-template-columns: repeat(2, 1fr); }
 	.facts { grid-template-columns: 1fr 1fr; }
 	.form__row { grid-template-columns: 1fr; }
-	.bar { grid-template-columns: 5.8rem 1fr 2.4rem; }
 	.askgm-cta { flex-direction: column; align-items: flex-start; }
 	.carousel__stage { height: clamp(20rem, 62vh, 30rem); }
 	.carousel__ui { grid-template-columns: 1fr; }
@@ -814,7 +780,6 @@ html:not(.js) .carousel__ui, html:not(.js) .viewer__bar, html:not(.js) [data-dem
 	html { scroll-behavior: auto; }
 	*, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 	.js .reveal { opacity: 1; transform: none; }
-	.js .fig:not(.in) .bar__fill { width: var(--v); }
 }
 
 /* 17. Games page ---------------------------------------------------------- */
