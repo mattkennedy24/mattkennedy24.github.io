@@ -216,6 +216,19 @@ test('The Dozen: purple (second try) earns half credit', () => {
 	assert.equal(T.dozenScore(9, 0, 9), 100);
 });
 
+test('The Dozen: spaces and invisible characters between squares still read all 9', () => {
+	const spaced = 'The Dozen: Daily Trivia\nGame 1184\n\nScore: 7\n🟩 🟪 🟥\n🟩\uFE0F🟩\uFE0F🟥\uFE0F\n🟥\u200B🟥\u200B🟩 \n4 Correct, Time 02:00';
+	const r = ok('dozen', spaced);
+	assert.deepEqual([r.raw, r.score], ['5/9 correct', 50]);   // (4 + 0.5) / 9
+});
+
+test('The Dozen: the wrong number of squares is an error, never a partial score', () => {
+	const short = T.parseGame('dozen', 'The Dozen: Daily Trivia\nGame 1185\n\nScore: 0\n🟥🟥🟥\n0 Correct, Time 01:00');
+	assert.match(short.error, /found 3 squares, but there should be 9/);
+	const odd = ok('dozen', 'The Dozen: Daily Trivia\nGame 1186\n\nScore: 2\n🟩🟩⬛\n⬛⬛⬛\n⬛⬛⬛\n2 Correct, Time 03:00');
+	assert.deepEqual([odd.raw, odd.score], ['2/9 correct', 22.2]);   // unanswered squares count as wrong
+});
+
 test('Top 5: real paste (4 coloured squares = 4/5 = 80); order and misses ignored', () => {
 	const r = ok('top5', TOP5);
 	assert.deepEqual([r.puzzle, r.raw, r.score, r.star], [966, '4/5', 80, false]);

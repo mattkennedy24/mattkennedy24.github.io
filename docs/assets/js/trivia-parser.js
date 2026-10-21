@@ -108,14 +108,18 @@
 
 	var SQUARES = ['🟨', '🟩', '🟦', '🟪'];                   // Connections: yellow, green, blue, purple
 	var DOZEN_SQUARES = ['🟥', '🟩', '🟪'];                             // The Dozen: red, green, purple
+	var OTHER_SQUARES = ['⬛', '⬜', '🟧', '🟨', '🟦', '🟫'];   // any other square: not a correct answer
 	var TOP5_MISS = ['⬜', '⬛'];                                                             // white / black square
 	var TOP5_HIT = ['🟥', '🟧', '🟨', '🟩', '🟦'];  // red, orange, yellow, green, blue = #1-#5
 
 	// Lines made only of the given emoji (optionally exactly n long), as rows and one flat list.
+	// Spaces and invisible characters that phones add when copying (variation selectors,
+	// zero-width spaces and joiners) are ignored, so "🟥 🟥 🟥" still counts as a row.
+	var INVISIBLE = /[\s\uFE0E\uFE0F\u200B-\u200D\u2060\uFEFF]/g;
 	function emojiRows(block, allowed, exactLength) {
 		var cells = [], rows = [];
 		block.split('\n').forEach(function (line) {
-			var chars = Array.from(line.trim());
+			var chars = Array.from(line.replace(INVISIBLE, ''));
 			if (chars.length && (!exactLength || chars.length === exactLength) &&
 				chars.every(function (c) { return allowed.indexOf(c) !== -1; })) {
 				rows.push(chars); cells = cells.concat(chars);
@@ -238,12 +242,15 @@
 		{
 			id: 'dozen', name: 'The Dozen', url: 'https://dailydozentrivia.com',
 			example: 'The Dozen: Daily Trivia\nGame 1182\n\nScore: 5\n🟥🟥🟥\n...',
-			rule: 'Green (first try) counts 1, purple (second try) counts half, red counts 0, over the 9 squares. The time and the in-game score are ignored.',
+			rule: 'Nine questions, one square each. Green (right first try) counts 1, purple (right on the double dip) counts half, red counts 0. The time and the in-game score are ignored.',
 			starRule: '',
 			header: /The Dozen:?\s*Daily Trivia[ \t]*\n[ \t]*Game[ \t]*#?[ \t]*([\d,]+)/gi,
 			parse: function (m, block) {
-				var cells = emojiRows(block, DOZEN_SQUARES).cells;
+				var cells = emojiRows(block, DOZEN_SQUARES.concat(OTHER_SQUARES)).cells;
 				if (!cells.length) { return { problem: 'The Dozen: I could not find the colour squares.' }; }
+				if (cells.length !== 9) {
+					return { problem: 'The Dozen: I found ' + cells.length + ' squares, but there should be 9 (one per question). Paste the whole result, including all three rows.' };
+				}
 				var greens = cells.filter(function (c) { return c === DOZEN_SQUARES[1]; }).length;
 				var purples = cells.filter(function (c) { return c === DOZEN_SQUARES[2]; }).length;
 				return { puzzle: toInt(m[1]), raw: (greens + purples) + '/' + cells.length + ' correct', score: dozenScore(greens, purples, cells.length), star: false };
